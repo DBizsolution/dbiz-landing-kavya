@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DBiz.ai — Your Enterprise. Agent-Operated. Starting Now.</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0D1B3E;--navy-deep:#070F22;--navy-light:#1A2D5A;
+  --orange:#E86A2A;--orange-hover:#D45A1A;--orange-glow:rgba(232,106,42,.1);
+  --bg:#FAFAFA;--bg-card:#FFF;--bg-warm:#F3F0EC;
+  --border:rgba(0,0,0,.06);--border-hover:rgba(0,0,0,.12);
+  --text:#111;--text-2:#555;--text-3:#999;
+  --r:16px;--r-lg:24px;--r-sm:10px;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.container{max-width:1240px;margin:0 auto;padding:0 40px}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal.v{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.4s}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:17px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(250,250,250,.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:all .3s}
+nav.scrolled{padding:12px 40px;box-shadow:0 1px 16px rgba(0,0,0,.04)}
+.logo{font-size:1.35rem;font-weight:800;letter-spacing:-.03em;color:var(--navy)}.logo span{color:var(--orange)}
+.nav-links{display:flex;gap:30px;list-style:none}
+.nav-links a{color:var(--text-2);text-decoration:none;font-size:.84rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--navy);color:#fff;border:none;padding:9px 22px;border-radius:100px;font-size:.84rem;font-weight:600;cursor:pointer;transition:all .3s;text-decoration:none;font-family:inherit}
+.nav-cta:hover{background:var(--navy-light);transform:translateY(-1px);box-shadow:0 6px 20px rgba(13,27,62,.18)}
+
+/* HERO */
+.hero{padding:148px 0 40px}
+.hero-ey{font-family:'DM Mono',monospace;font-size:.76rem;color:var(--orange);letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px;opacity:0;animation:fu .7s .2s forwards}
+.hero-ey span{color:var(--text-3);margin:0 8px}
+.hero h1{font-size:clamp(2.6rem,5vw,4.5rem);font-weight:800;line-height:1.06;letter-spacing:-.035em;max-width:740px;margin-bottom:22px}
+.hero h1 .ln{display:block;overflow:hidden}
+.hero h1 .li{display:block;opacity:0;transform:translateY(100%);animation:su .8s cubic-bezier(.16,1,.3,1) forwards}
+.hero h1 .ln:nth-child(2) .li{animation-delay:.12s}
+.hero h1 .ln:nth-child(3) .li{animation-delay:.24s}
+.hero h1 em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--orange);font-weight:400}
+@keyframes su{to{opacity:1;transform:translateY(0)}}
+@keyframes fu{to{opacity:1}}
+.hero-body{font-size:1.05rem;line-height:1.65;color:var(--text-2);max-width:560px;margin-bottom:32px;opacity:0;animation:fu .7s .5s forwards}
+.hero-ctas{display:flex;align-items:center;gap:16px;opacity:0;animation:fu .7s .65s forwards}
+.btn{background:var(--orange);color:#fff;border:none;padding:13px 28px;border-radius:100px;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .3s;text-decoration:none;font-family:inherit;display:inline-flex;align-items:center;gap:9px}
+.btn:hover{background:var(--orange-hover);transform:translateY(-2px);box-shadow:0 8px 28px rgba(232,106,42,.28)}
+.btn .arr{transition:transform .3s}.btn:hover .arr{transform:translateX(4px)}
+.btn-text{color:var(--text-2);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .2s;border-bottom:1px solid var(--border)}
+.btn-text:hover{color:var(--text);border-color:var(--text)}
+
+/* TRUST */
+.trust{padding:36px 0;border-bottom:1px solid var(--border);opacity:0;animation:fu .7s .9s forwards}
+.trust-label{font-size:.72rem;color:var(--text-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px}
+.trust-logos{display:flex;gap:36px;align-items:center}
+.trust-logos div{width:80px;height:24px;border-radius:4px;background:rgba(0,0,0,.06)}
+
+/* STATS */
+.stats{padding:56px 0;border-bottom:1px solid var(--border)}
+.stats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.stat{text-align:center;position:relative}
+.stat:not(:last-child)::after{content:'';position:absolute;right:0;top:50%;transform:translateY(-50%);width:1px;height:40px;background:var(--border)}
+.stat-n{font-size:clamp(2rem,3vw,3rem);font-weight:800;color:var(--orange);letter-spacing:-.04em;line-height:1;margin-bottom:5px}
+.stat-l{font-size:.76rem;color:var(--text-2);line-height:1.4;max-width:120px;margin:0 auto}
+
+/* SH */
+.sh{margin-bottom:40px}
+.sh h2{font-size:clamp(1.7rem,3vw,2.5rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:10px}
+.sh h2 em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--orange);font-weight:400}
+.sh p{font-size:1rem;color:var(--text-2);max-width:520px;line-height:1.6}
+
+/* ========== FRONTIER SECTION ========== */
+.frontier{padding:88px 0;background:var(--navy);color:#fff;position:relative;overflow:hidden}
+.frontier::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:48px 48px}
+.frontier .sh h2{color:#fff}.frontier .sh h2 em{color:var(--orange)}.frontier .sh p{color:rgba(255,255,255,.5)}
+
+/* Toggle bar */
+.view-toggle{display:flex;gap:3px;background:rgba(255,255,255,.06);border-radius:100px;padding:3px;width:fit-content;margin-bottom:36px;border:1px solid rgba(255,255,255,.08)}
+.vt-btn{padding:9px 22px;border:none;background:transparent;color:rgba(255,255,255,.4);font-size:.82rem;font-weight:600;border-radius:100px;cursor:pointer;transition:all .3s;font-family:inherit}
+.vt-btn.active{background:var(--orange);color:#fff}
+.vt-btn:not(.active):hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.7)}
+.view-panel{display:none;position:relative;z-index:2}
+.view-panel.active{display:block;animation:fi .4s ease}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* Platform visual — hover cards */
+.plat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.plat-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--r);padding:28px 24px;cursor:pointer;transition:all .4s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+.plat-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--orange);transform:scaleY(0);transition:transform .35s}
+.plat-card:hover,.plat-card.active{background:rgba(232,106,42,.06);border-color:rgba(232,106,42,.3);transform:translateY(-3px);box-shadow:0 8px 30px rgba(232,106,42,.1)}
+.plat-card:hover::before,.plat-card.active::before{transform:scaleY(1)}
+.pc-num{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--orange);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.pc-title{font-size:1.05rem;font-weight:700;margin-bottom:4px}
+.pc-sub{font-size:.72rem;color:rgba(255,255,255,.3);margin-bottom:10px}
+.pc-desc{font-size:.82rem;line-height:1.6;color:rgba(255,255,255,.5);max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.16,1,.3,1),opacity .3s;opacity:0}
+.plat-card:hover .pc-desc,.plat-card.active .pc-desc{max-height:200px;opacity:1}
+.pc-sticky{font-size:.8rem;font-weight:600;color:var(--orange);font-style:italic;max-height:0;overflow:hidden;opacity:0;transition:max-height .5s,opacity .3s}
+.plat-card:hover .pc-sticky,.plat-card.active .pc-sticky{max-height:60px;opacity:1;margin-top:10px}
+.pc-partners{font-family:'DM Mono',monospace;font-size:.58rem;color:rgba(255,255,255,.2);margin-top:12px;max-height:0;overflow:hidden;opacity:0;transition:max-height .5s,opacity .3s}
+.plat-card:hover .pc-partners,.plat-card.active .pc-partners{max-height:60px;opacity:1}
+.pc-link{display:inline-block;margin-top:10px;font-size:.78rem;font-weight:600;color:var(--orange);text-decoration:none;max-height:0;overflow:hidden;opacity:0;transition:max-height .5s,opacity .3s}
+.plat-card:hover .pc-link,.plat-card.active .pc-link{max-height:30px;opacity:1}
+
+/* Frontier output badge */
+.front-output{text-align:center;margin-top:28px}
+.front-output-badge{display:inline-flex;align-items:center;gap:9px;background:rgba(232,106,42,.1);border:1px solid rgba(232,106,42,.2);border-radius:100px;padding:10px 26px;font-size:.84rem;font-weight:700;color:var(--orange)}
+
+/* ========== AI STACK TOGGLE ========== */
+.stack-visual{position:relative;z-index:2}
+.stack-rows{display:flex;flex-direction:column;gap:6px}
+.stack-row{display:grid;grid-template-columns:160px 1fr;gap:0;border-radius:var(--r-sm);overflow:hidden;transition:all .3s}
+.stack-row:hover{transform:translateX(4px)}
+.sr-label{background:var(--navy-light);padding:16px 20px;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff}
+.sr-content{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-left:none;padding:14px 24px;display:flex;align-items:center;gap:24px}
+.sr-content.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.sr-item{display:flex;flex-direction:column;gap:2px}
+.sr-prod{font-size:.88rem;font-weight:700;color:var(--orange)}
+.sr-desc{font-size:.74rem;color:rgba(255,255,255,.45);line-height:1.4}
+.stack-title{text-align:center;margin-bottom:24px}
+.stack-title h3{font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:4px}
+.stack-title p{font-size:.78rem;color:rgba(255,255,255,.35);font-family:'DM Mono',monospace;letter-spacing:.06em}
+
+/* ========== EXPERTISE ========== */
+.expertise{padding:88px 0;background:var(--bg-card);border-top:1px solid var(--border)}
+.tabs{display:flex;gap:3px;background:var(--bg);border-radius:100px;padding:3px;width:fit-content;margin-bottom:32px;border:1px solid var(--border)}
+.tab{padding:8px 20px;border:none;background:transparent;color:var(--text-2);font-size:.82rem;font-weight:600;border-radius:100px;cursor:pointer;transition:all .3s;font-family:inherit}
+.tab.active{background:var(--navy);color:#fff}
+.tab:not(.active):hover{background:rgba(0,0,0,.03);color:var(--text)}
+.tp{display:none}.tp.active{display:block;animation:fi .3s ease}
+.ex-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.ex{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:26px 22px;transition:all .3s}
+.ex:hover{border-color:var(--border-hover);transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,0,0,.04)}
+.ex-lb{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--orange);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+.ex h4{font-size:1.6rem;font-weight:800;color:var(--orange);margin-bottom:6px;letter-spacing:-.02em}
+.ex h5{font-size:.95rem;font-weight:700;margin-bottom:6px}
+.ex p{font-size:.8rem;line-height:1.55;color:var(--text-2)}
+.tech-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.tech{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:20px 18px;transition:all .3s}
+.tech:hover{border-color:var(--border-hover)}
+.tech h5{font-size:.7rem;color:var(--orange);text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px;font-weight:600}
+.tech .pl{font-size:.82rem;line-height:1.5;color:var(--text-2);margin-bottom:6px}
+.tech .cn{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--text-3);font-style:italic}
+.ai-bar{margin-top:12px;background:var(--orange-glow);border:1px solid rgba(232,106,42,.12);border-radius:var(--r);padding:20px 24px;display:flex;align-items:center;justify-content:space-between}
+.ai-bar h5{font-size:.7rem;color:var(--orange);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:3px}
+.ai-bar p{font-size:.82rem;color:var(--text-2)}
+.ai-bar .note{font-size:.74rem;color:var(--text-3);max-width:240px;font-style:italic;text-align:right}
+
+/* TESTI */
+.testi{padding:56px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center}
+.testi blockquote{font-family:'Instrument Serif',serif;font-size:1.4rem;font-style:italic;color:var(--text);line-height:1.5;max-width:680px;margin:0 auto 16px}
+.testi cite{font-family:'DM Sans',sans-serif;font-style:normal;font-size:.82rem;color:var(--text-3)}
+
+/* HOW */
+.how{padding:88px 0}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:36px}
+.how-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:28px 24px;transition:all .35s;position:relative;overflow:hidden}
+.how-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.how-card:hover::before{transform:scaleX(1)}
+.how-card:hover{border-color:var(--border-hover);transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,0,0,.04)}
+.how-days{font-size:2rem;font-weight:800;color:var(--orange);letter-spacing:-.04em;margin-bottom:2px}
+.how-name{font-size:1rem;font-weight:700;margin-bottom:10px}
+.how-card p{font-size:.82rem;line-height:1.6;color:var(--text-2)}
+.how-out{margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-size:.75rem;font-weight:600;color:var(--orange)}
+.how-note{margin-top:16px;font-size:.76rem;color:var(--text-3);font-style:italic;text-align:center}
+
+/* ========== WHY DBIZ — OWN SECTION ========== */
+.why-section{padding:88px 0;background:var(--bg-warm);border-top:1px solid var(--border)}
+.why-items{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.why-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:32px 28px;transition:all .3s}
+.why-card:hover{border-color:var(--border-hover);box-shadow:0 4px 20px rgba(0,0,0,.04)}
+.why-card h4{font-size:1rem;font-weight:700;margin-bottom:8px}
+.why-card p{font-size:.84rem;line-height:1.6;color:var(--text-2)}
+
+/* Enterprise Partners — distinct */
+.partner-row{margin-top:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:32px 28px;display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.pr-col h4{font-size:1rem;font-weight:700;margin-bottom:8px}
+.pr-col p{font-size:.84rem;line-height:1.6;color:var(--text-2)}
+.pr-logos{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.pr-logos span{background:var(--bg);border:1px solid var(--border);padding:4px 12px;border-radius:100px;font-size:.72rem;color:var(--text-2);font-weight:500}
+
+/* CTA */
+.cta-section{padding:88px 0;background:var(--navy-deep);color:#fff;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;top:50%;left:50%;width:500px;height:500px;border-radius:50%;background:var(--orange);filter:blur(220px);opacity:.08;transform:translate(-50%,-50%)}
+.cta-section .container{position:relative;z-index:2}
+.cta-section h2{font-size:clamp(1.9rem,3.8vw,2.8rem);font-weight:800;letter-spacing:-.03em;line-height:1.12;margin-bottom:6px}
+.cta-section h2 em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--orange);font-weight:400}
+.cta-section .sub{font-size:.95rem;color:rgba(255,255,255,.5);margin-bottom:40px}
+.cta-btns{display:flex;justify-content:center;align-items:center;gap:16px}
+.cta-btns .btn-text{color:rgba(255,255,255,.45);border-color:rgba(255,255,255,.15)}
+.cta-btns .btn-text:hover{color:#fff;border-color:rgba(255,255,255,.4)}
+
+/* FOOTER */
+footer{padding:56px 0 32px;background:var(--navy-deep);border-top:1px solid rgba(255,255,255,.06)}
+.foot-main{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.06)}
+.foot-col{display:flex;flex-direction:column;gap:6px}
+.foot-logo{font-size:1.2rem;font-weight:800;color:#fff;letter-spacing:-.03em;margin-bottom:4px}.foot-logo span{color:var(--orange)}
+.foot-tag{font-family:'DM Mono',monospace;font-size:.66rem;color:rgba(255,255,255,.2);letter-spacing:.06em}.foot-tag span{margin:0 4px}
+.foot-heading{font-size:.7rem;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+.foot-col a{font-size:.78rem;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s;line-height:1.8}
+.foot-col a:hover{color:rgba(255,255,255,.6)}
+.foot-bottom{padding-top:24px;display:flex;flex-direction:column;gap:12px}
+.foot-legal{display:flex;gap:20px}
+.foot-legal a{font-size:.7rem;color:rgba(255,255,255,.2);text-decoration:none;transition:color .2s}
+.foot-legal a:hover{color:rgba(255,255,255,.4)}
+.foot-ack{font-size:.7rem;color:rgba(255,255,255,.18);line-height:1.5;max-width:700px}
+.foot-copy{font-size:.66rem;color:rgba(255,255,255,.12)}
+
+/* RESPONSIVE */
+@media(max-width:1000px){.plat-grid{grid-template-columns:1fr 1fr}.stack-row{grid-template-columns:120px 1fr}.partner-row{grid-template-columns:1fr}.foot-main{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){.container{padding:0 24px}nav{padding:14px 24px}.nav-links{display:none}.stats-grid,.ex-grid,.tech-grid,.how-grid{grid-template-columns:1fr}.stat:not(:last-child)::after{display:none}.plat-grid{grid-template-columns:1fr}.why-items{grid-template-columns:1fr}.hero-ctas{flex-direction:column;align-items:flex-start}.ai-bar{flex-direction:column;gap:10px;text-align:center}.ai-bar .note{text-align:center;max-width:100%}.cta-btns{flex-direction:column}.foot-main{grid-template-columns:1fr}.foot-legal{flex-wrap:wrap}.sr-content.split{grid-template-columns:1fr}.stack-row{grid-template-columns:100px 1fr}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="logo">dbiz<span>.ai</span></div>
+  <ul class="nav-links"><li><a href="#stack">Our Solutions</a></li><li><a href="#expertise">Our Work</a></li><li><a href="#">About Us</a></li><li><a href="#">Careers</a></li></ul>
+  <a href="#cta" class="nav-cta">Contact Us</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-ey">Human-Led <span>|</span> Agent-Operated <span>|</span> Data-Powered</div>
+    <h1>
+      <span class="ln"><span class="li">Your enterprise.</span></span>
+      <span class="ln"><span class="li"><em>Agent-operated.</em></span></span>
+      <span class="ln"><span class="li">Starting now.</span></span>
+    </h1>
+    <p class="hero-body">Most enterprises have tried AI. Most of it didn't scale — not because the technology failed, but because no one connected the ambition to what actually got built. We close that gap. We call the result a Frontier Organisation: human-led, agent-operated, data-powered.</p>
+    <div class="hero-ctas">
+      <a href="#cta" class="btn">Get an architecture assessment <span class="arr">→</span></a>
+      <a href="#cta" class="btn-text">Or talk to our team</a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<div class="trust"><div class="container"><div class="trust-label">Trusted by 50+ enterprises across 6 countries</div><div class="trust-logos"><div></div><div></div><div></div><div></div><div></div><div></div></div></div></div>
+
+<!-- STATS -->
+<section class="stats"><div class="container"><div class="stats-grid">
+  <div class="stat reveal"><div class="stat-n" data-t="10" data-s="+">0</div><div class="stat-l">Years enterprise delivery</div></div>
+  <div class="stat reveal d1"><div class="stat-n" data-t="50" data-s="+">0</div><div class="stat-l">Enterprise clients</div></div>
+  <div class="stat reveal d2"><div class="stat-n" data-t="150" data-s="+">0</div><div class="stat-l">AI solutions in production</div></div>
+  <div class="stat reveal d3"><div class="stat-n" data-t="11" data-s="">0</div><div class="stat-l">Industries</div></div>
+  <div class="stat reveal d4"><div class="stat-n" data-t="6" data-s="">0</div><div class="stat-l">Countries</div></div>
+</div></div></section>
+
+<!-- FRONTIER SECTION — combined with toggle -->
+<section class="frontier" id="stack">
+  <div class="container">
+    <div class="sh reveal">
+      <h2>The AI gap <em>every enterprise hits.</em><br>And how we close it.</h2>
+      <p>We translate your priorities into an AI and technology roadmap. Then deliver against it — across every layer, with industry-leading partners at each step. Engage us for one capability or the full transformation.</p>
+    </div>
+
+    <div class="view-toggle reveal d1">
+      <button class="vt-btn active" data-v="capabilities">Our Capabilities</button>
+      <button class="vt-btn" data-v="framework">The AI Framework at Work</button>
+    </div>
+
+    <!-- VIEW 1: Capability cards with hover explainers -->
+    <div class="view-panel active" id="vp-capabilities">
+      <div class="plat-grid">
+        <div class="plat-card" data-n="0">
+          <div class="pc-num">Start here</div>
+          <div class="pc-title">Strategy & Architecture</div>
+          <div class="pc-sub">Futures Studio · TechOffice Foundry</div>
+          <div class="pc-desc">Your business priorities become an AI and technology roadmap. Use case prioritisation, readiness assessment, architecture blueprint, data governance and security posture. Without strategic alignment, investment gets scattered.</div>
+          <div class="pc-partners">AWS · Azure · GCP · Anthropic · OpenAI</div>
+          <a href="#" class="pc-link">Deep dive →</a>
+        </div>
+        <div class="plat-card" data-n="1">
+          <div class="pc-num">Cloud</div>
+          <div class="pc-title">AI-Ready Infrastructure</div>
+          <div class="pc-sub">Multi-hyperscaler · Purpose-built</div>
+          <div class="pc-desc">Cloud built for AI workloads, not retrofitted for them. Environments purpose-built for agents, data pipelines, and AI models — with governance, cost controls, and observability enterprise IT requires.</div>
+          <div class="pc-partners">AWS (Advanced) · Azure (Solutions Partner) · GCP</div>
+          <a href="#" class="pc-link">Deep dive →</a>
+        </div>
+        <div class="plat-card" data-n="2">
+          <div class="pc-num">Data & AI</div>
+          <div class="pc-title">The Intelligence Layer</div>
+          <div class="pc-sub">FactWeavers™ · Domain Data Cloud</div>
+          <div class="pc-desc">Every AI initiative stalls on the same thing: the data isn't ready. FactWeavers™ cleans, unifies, and activates enterprise data — pre-modelled for your industry, ready for agents from day one.</div>
+          <div class="pc-sticky">No six-month data clean-up before value starts flowing.</div>
+          <div class="pc-partners">Snowflake · Databricks · Fabric · BigQuery · Claude · GPT · Gemini</div>
+          <a href="#" class="pc-link">Deep dive →</a>
+        </div>
+        <div class="plat-card" data-n="3">
+          <div class="pc-num">Business Apps & Integration</div>
+          <div class="pc-title">Connected Systems, Not Silos</div>
+          <div class="pc-sub">No rip and replace</div>
+          <div class="pc-desc">CRM, ERP, and platform investments don't need replacing — they need unlocking. We connect existing systems so AI agents can read, write, and act across your entire application landscape.</div>
+          <div class="pc-sticky">Your platforms start working for AI — not against it.</div>
+          <div class="pc-partners">Salesforce · Dynamics 365 · Boomi · MuleSoft · Workato · n8n</div>
+          <a href="#" class="pc-link">Deep dive →</a>
+        </div>
+        <div class="plat-card" data-n="4">
+          <div class="pc-num">Product & Experience</div>
+          <div class="pc-title">What People Actually Use</div>
+          <div class="pc-sub">AI-native · Perpetual Engineering</div>
+          <div class="pc-desc">AI-native applications, digital twins, and next-gen experiences that evolve with the business. Designed for the new interaction patterns between humans and agents.</div>
+          <div class="pc-partners">Agentforce · Copilot Studio · Claude Cowork</div>
+          <a href="#" class="pc-link">Deep dive →</a>
+        </div>
+        <div class="plat-card" data-n="5">
+          <div class="pc-num">Managed Services</div>
+          <div class="pc-title">AI-First Operations</div>
+          <div class="pc-sub">The team that built it runs it</div>
+          <div class="pc-desc">AI-first monitoring, governance, and continuous improvement across your entire stack. Not a support contract from a team that's never seen the architecture.</div>
+          <div class="pc-sticky">Operational in weeks. Self-optimising within months.</div>
+          <div class="pc-partners">AIOps · DevOps · CI/CD · FinOps · SLA L1–L3</div>
+          <a href="#" class="pc-link">Deep dive →</a>
+        </div>
+        <div class="plat-card" data-n="6">
+          <div class="pc-num">Governance</div>
+          <div class="pc-title">Security & AI Risk</div>
+          <div class="pc-sub">Built in, not bolted on</div>
+          <div class="pc-desc">Data sovereignty, AI governance frameworks, hallucination risk management, model drift monitoring, and compliance-ready architecture — embedded into every layer from day one.</div>
+        </div>
+      </div>
+      <div class="front-output"><div class="front-output-badge">▲ The Frontier Organisation</div></div>
+    </div>
+
+    <!-- VIEW 2: The AI Transformation Stack -->
+    <div class="view-panel" id="vp-framework">
+      <div class="stack-visual">
+        <div class="stack-title">
+          <h3>DBiz AI Transformation Stack</h3>
+          <p>No capability gaps. No vendor lock-in.</p>
+        </div>
+        <div class="stack-rows">
+          <div class="stack-row"><div class="sr-label">Strategy</div><div class="sr-content"><div class="sr-item"><div class="sr-prod">Futures Studio</div><div class="sr-desc">AI ambition, roadmap & use case prioritisation aligned to measurable business values</div></div></div></div>
+          <div class="stack-row"><div class="sr-label">Architecture</div><div class="sr-content"><div class="sr-item"><div class="sr-prod">TechOffice Foundry</div><div class="sr-desc">AI architecture foundation, governance & standards, Well-Architected review with AI-pillars</div></div></div></div>
+          <div class="stack-row"><div class="sr-label">Cloud</div><div class="sr-content split"><div class="sr-item"><div class="sr-prod">Multi-Cloud AI Foundation</div><div class="sr-desc">AWS · Azure · GCP — deploy on the right cloud for each workload</div></div><div class="sr-item"><div class="sr-prod">DBiz Canvas</div><div class="sr-desc">Concept to code in days</div></div></div></div>
+          <div class="stack-row"><div class="sr-label">Development</div><div class="sr-content split"><div class="sr-item"><div class="sr-prod">Nexus Platform</div><div class="sr-desc">Enterprise AI dev environment</div></div><div class="sr-item"><div class="sr-prod">Perpetual Engineering</div><div class="sr-desc">AI agents across the full SDLC</div></div></div></div>
+          <div class="stack-row"><div class="sr-label">Productivity</div><div class="sr-content split"><div class="sr-item"><div class="sr-prod">Claude Cowork & Copilot</div><div class="sr-desc">AI-automation for every role</div></div><div class="sr-item"><div class="sr-prod">AI-Infused BizApps</div><div class="sr-desc">Autonomous agents for business execution with SaaS platforms</div></div></div></div>
+          <div class="stack-row"><div class="sr-label">Orchestration</div><div class="sr-content split"><div class="sr-item"><div class="sr-prod">Agent Studio</div><div class="sr-desc">Agentic AI and multi-agent orchestration</div></div><div class="sr-item"><div class="sr-prod">Nexus iConnector</div><div class="sr-desc">MCP connectors via Boomi, MuleSoft, Workato — no rip & replace</div></div></div></div>
+          <div class="stack-row"><div class="sr-label">Data & Insights</div><div class="sr-content split"><div class="sr-item"><div class="sr-prod">FactWeavers.ai</div><div class="sr-desc">Data democratisation & quick insights with domain data cloud</div></div><div class="sr-item"><div class="sr-prod">DBiz Compass</div><div class="sr-desc">AI-infused data engineering</div></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROVEN -->
+<section class="expertise" id="expertise">
+  <div class="container">
+    <div class="sh reveal"><h2>Proven <em>where it matters.</em></h2><p>50+ enterprise deployments across 11 industries.</p></div>
+    <div class="tabs reveal">
+      <button class="tab active" data-t="ind">By Industry</button>
+      <button class="tab" data-t="sol">By Solution</button>
+      <button class="tab" data-t="tech">By Technology</button>
+    </div>
+    <div class="tp active" id="tp-ind"><div class="ex-grid">
+      <div class="ex"><div class="ex-lb">Placeholder industry</div><h4>[Key metric]</h4><h5>[Outcome headline]</h5><p>[One-line business outcome.]</p></div>
+      <div class="ex"><div class="ex-lb">Placeholder industry</div><h4>[Key metric]</h4><h5>[Outcome headline]</h5><p>[One-line business outcome.]</p></div>
+      <div class="ex"><div class="ex-lb">Placeholder industry</div><h4>[Key metric]</h4><h5>[Outcome headline]</h5><p>[One-line business outcome.]</p></div>
+    </div></div>
+    <div class="tp" id="tp-sol"><div class="ex-grid">
+      <div class="ex"><div class="ex-lb">Placeholder solution</div><h4>[Key metric]</h4><h5>[Outcome headline]</h5><p>[One-line business outcome.]</p></div>
+      <div class="ex"><div class="ex-lb">Placeholder solution</div><h4>[Key metric]</h4><h5>[Outcome headline]</h5><p>[One-line business outcome.]</p></div>
+      <div class="ex"><div class="ex-lb">Placeholder solution</div><h4>[Key metric]</h4><h5>[Outcome headline]</h5><p>[One-line business outcome.]</p></div>
+    </div></div>
+    <div class="tp" id="tp-tech">
+      <div class="tech-grid">
+        <div class="tech"><h5>Cloud & AI</h5><div class="pl">AWS (Advanced) · Azure (Solutions) · GCP</div><div class="cn">40+ AWS certified experts</div></div>
+        <div class="tech"><h5>Data Platforms</h5><div class="pl">Snowflake · Databricks · Fabric · BigQuery</div><div class="cn">FactWeavers™ built on top</div></div>
+        <div class="tech"><h5>Integration</h5><div class="pl">Boomi · MuleSoft · Workato · n8n</div><div class="cn">No rip & replace</div></div>
+        <div class="tech"><h5>Business Apps</h5><div class="pl">Salesforce · Dynamics 365 · Power Platform</div><div class="cn">200+ Microsoft certifications</div></div>
+      </div>
+      <div class="ai-bar"><div><h5>AI Models</h5><p>Claude · GPT · Gemini · Bedrock · Azure OpenAI · Vertex AI</p></div><div class="note">Multi-model by design — agents run on the best model for each task.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testi"><div class="container reveal">
+  <blockquote>"[Placeholder — CTO or CIO quote about working with DBiz.]"</blockquote>
+  <cite>[Name], [Title], [Company]</cite>
+</div></section>
+
+<!-- HOW WE WORK -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="sh reveal"><h2>How we work. <em>Built for pace, not paperwork.</em></h2><p>Every engagement is time-boxed. Milestones are fixed. Ambiguity gets eliminated early.</p></div>
+    <div class="how-grid">
+      <div class="how-card reveal d1"><div class="how-days">5 days</div><div class="how-name">Align & Assess</div><p>Leadership aligned on AI ambition. Architecture assessed. Readiness gaps surfaced. A costed roadmap and evidence to make investment decisions.</p><div class="how-out">Board-aligned AI roadmap.</div></div>
+      <div class="how-card reveal d2"><div class="how-days">15 days</div><div class="how-name">Specify & Validate</div><p>System specification generated. Data foundations validated. Working system shipped and tested with real users in your environment.</p><div class="how-out">Validated MVP in production.</div></div>
+      <div class="how-card reveal d3"><div class="how-days">90 days</div><div class="how-name">Industrialise & Scale</div><p>Enterprise-grade system live. Agents deployed. Data democratised. Operations handed to the team that built it.</p><div class="how-out">Frontier Organisation operational.</div></div>
+    </div>
+    <div class="how-note reveal d4">Timelines are benchmarks based on 50+ enterprise engagements. Scope varies by environment.</div>
+  </div>
+</section>
+
+<!-- WHY DBIZ — OWN SECTION -->
+<section class="why-section">
+  <div class="container">
+    <div class="sh reveal"><h2>Why enterprises <em>choose DBiz.</em></h2></div>
+    <div class="why-items">
+      <div class="why-card reveal d1">
+        <h4>Expertise that works together.</h4>
+        <p>Strategy, cloud, data, platforms, product, design, operations — our teams work across every layer, not within silos. Your transformation is shaped by people who understand the full picture, not just their corner of it.</p>
+      </div>
+      <div class="why-card reveal d2">
+        <h4>Transformation at scale.</h4>
+        <p>50+ enterprise clients. 150+ AI solutions. Six countries. Over a decade of enterprise delivery — not a pitch deck.</p>
+      </div>
+      <div class="why-card reveal d3">
+        <h4>Time-boxed delivery. Every engagement.</h4>
+        <p>Outcomes within defined timeframes. Ambiguity is the enemy of delivery — so we don't allow it.</p>
+      </div>
+      <div class="why-card reveal d4">
+        <h4>Production platforms. Not presentations.</h4>
+        <p>NEXUS, Agent Studio, FactWeavers™, DBiz Canvas — production systems deployed in enterprise environments. We recommend what we've already built.</p>
+      </div>
+    </div>
+    <!-- Enterprise Partnerships + Domain Depth — separated -->
+    <div class="partner-row reveal d5">
+      <div class="pr-col">
+        <h4>Enterprise Partnerships</h4>
+        <p>Certified at the highest tiers with the industry's leading technology providers.</p>
+        <div class="pr-logos">
+          <span>AWS Advanced</span><span>Azure Solutions</span><span>Salesforce</span><span>Dynamics 365</span><span>Snowflake</span><span>Databricks</span><span>Anthropic</span><span>Boomi</span><span>MuleSoft</span>
+        </div>
+      </div>
+      <div class="pr-col">
+        <h4>Domain Depth</h4>
+        <p>Deep sector expertise shaped by 150+ enterprise engagements.</p>
+        <div class="pr-logos">
+          <span>Financial Services</span><span>Logistics & Fleet</span><span>Real Estate</span><span>Aged Care</span><span>Automotive</span><span>Government</span><span>Retail</span><span>Construction</span><span>Manufacturing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section" id="cta">
+  <div class="container">
+    <h2 class="reveal">Your Frontier Organisation <em>starts with a conversation.</em></h2>
+    <p class="sub reveal d1">One partner. Full stack. No handoff.</p>
+    <div class="cta-btns reveal d2">
+      <a href="#" class="btn">Contact us <span class="arr">→</span></a>
+      <a href="#" class="btn-text">Or get an architecture assessment</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer><div class="container">
+  <div class="foot-main">
+    <div class="foot-col"><div class="foot-logo">dbiz<span>.ai</span></div><div class="foot-tag">Human-Led <span>|</span> Agent-Operated <span>|</span> Data-Powered</div><div style="margin-top:10px;font-size:.7rem;color:rgba(255,255,255,.2)">10 offices · 6 countries · 800+ people</div></div>
+    <div class="foot-col"><div class="foot-heading">Company</div><a href="#">About Us</a><a href="#">Our Work</a><a href="#">Careers</a><a href="#">Contact Us</a><a href="#">Blog</a></div>
+    <div class="foot-col"><div class="foot-heading">Solutions</div><a href="#">Strategy & Architecture</a><a href="#">Cloud</a><a href="#">Data & AI</a><a href="#">Business Apps & Integration</a><a href="#">Product & Experience</a><a href="#">Managed Services</a></div>
+    <div class="foot-col"><div class="foot-heading">Partners</div><a href="#">AWS</a><a href="#">Microsoft Azure</a><a href="#">Salesforce</a><a href="#">Snowflake</a><a href="#">Databricks</a><a href="#">Boomi</a><a href="#">Anthropic</a></div>
+  </div>
+  <div class="foot-bottom">
+    <div class="foot-legal"><a href="#">Privacy Policy</a><a href="#">Legal</a><a href="#">Terms of Use</a><a href="#">Modern Slavery Statement</a></div>
+    <div class="foot-ack">We acknowledge the Traditional Custodians of the lands on which we work and live, and pay our respects to Elders past, present, and emerging.</div>
+    <div class="foot-copy">© 2026 DBiz.ai. All rights reserved.</div>
+  </div>
+</div></footer>
+
+<script>
+// Reveal
+const o=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v')})},{threshold:.06,rootMargin:'0px 0px -16px 0px'});
+document.querySelectorAll('.reveal').forEach(e=>o.observe(e));
+
+// Nav
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40)});
+
+// Count-up
+const sO=new IntersectionObserver(e=>{e.forEach(x=>{if(!x.isIntersecting)return;const el=x.target,t=+el.dataset.t,s=el.dataset.s||'';let c=0;const st=t/(1200/16);const tm=setInterval(()=>{c+=st;if(c>=t){c=t;clearInterval(tm)}el.textContent=Math.round(c)+s},16);sO.unobserve(el)})},{threshold:.5});
+document.querySelectorAll('.stat-n').forEach(e=>sO.observe(e));
+
+// Expertise tabs
+document.querySelectorAll('.tab').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tp').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('tp-'+b.dataset.t).classList.add('active')})});
+
+// View toggle (Capabilities / Framework)
+document.querySelectorAll('.vt-btn').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.vt-btn').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.view-panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('vp-'+b.dataset.v).classList.add('active')})});
+
+// Stagger capability cards on scroll
+const pO=new IntersectionObserver(e=>{e.forEach(x=>{if(!x.isIntersecting)return;x.target.querySelectorAll('.plat-card').forEach((c,i)=>{c.style.opacity='0';c.style.transform='translateY(16px)';c.style.transition='opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1)';setTimeout(()=>{c.style.opacity='1';c.style.transform='translateY(0)'},100+i*80)});pO.unobserve(x.target)})},{threshold:.1});
+const pg=document.querySelector('.plat-grid');if(pg)pO.observe(pg);
+
+// Stagger stack rows
+const stO=new IntersectionObserver(e=>{e.forEach(x=>{if(!x.isIntersecting)return;x.target.querySelectorAll('.stack-row').forEach((r,i)=>{r.style.opacity='0';r.style.transform='translateX(-16px)';r.style.transition='opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1)';setTimeout(()=>{r.style.opacity='1';r.style.transform='translateX(0)'},80+i*80)});stO.unobserve(x.target)})},{threshold:.1});
+const sr=document.querySelector('.stack-rows');if(sr)stO.observe(sr);
+</script>
+</body>
+</html>
