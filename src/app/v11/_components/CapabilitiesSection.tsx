@@ -82,7 +82,7 @@ export const CapabilitiesSection = () => {
           </p>
         </div>
 
-        <div role='tablist' className='flex gap-0 border border-[var(--bp-hair)] mb-6 w-fit'>
+        <div role='tablist' className='flex gap-0 border border-[var(--bp-hair)] mb-12 w-fit'>
           {TABS.map((t) => (
             <button
               key={t.id}
@@ -159,10 +159,17 @@ export const CapabilitiesSection = () => {
                 <span>{card.pill}</span>
                 <span className='k'>{card.coord}</span>
               </div>
-              <GeometricIcon
-                name={card.icon}
-                className='w-16 h-16 mb-4 opacity-60'
-              />
+              {card.image ? (
+                <div className='cap-thumb'>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={card.image} alt='' loading='lazy' />
+                </div>
+              ) : (
+                <GeometricIcon
+                  name={card.icon}
+                  className='w-16 h-16 mb-4 opacity-60'
+                />
+              )}
               <h3>{card.title}</h3>
               <p>{card.body}</p>
               <p className='bp-mono-accent' style={{ marginTop: 14 }}>
