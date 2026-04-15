@@ -5,8 +5,8 @@ import { Icon } from '@/components/icon'
 import { cases } from '../_content/cases'
 import { GeometricIcon } from './GeometricIcon'
 
-const CARD_WIDTH = 360
-const CARD_GAP = 24
+const CARD_WIDTH = 380
+const CARD_GAP = 40
 
 const INDUSTRIES = ['All', ...Array.from(new Set(cases.map((c) => c.industry)))] as const
 type Pill = (typeof INDUSTRIES)[number]
@@ -68,10 +68,12 @@ export const ProvenSection = () => {
         <div
           ref={scrollRef}
           onScroll={onScroll}
-          className='overflow-x-auto pb-4'
+          className='overflow-x-auto'
           style={{
             scrollSnapType: 'x mandatory',
             scrollPaddingLeft: 0,
+            overflowY: 'hidden',
+            paddingBlock: 4,
           }}
         >
           <div className='flex' style={{ gap: CARD_GAP }}>
@@ -84,6 +86,7 @@ export const ProvenSection = () => {
                   scrollSnapAlign: 'start',
                   minWidth: CARD_WIDTH,
                   maxWidth: CARD_WIDTH,
+                  padding: 32,
                 }}
               >
                 <span className='cell-bg' />
@@ -92,10 +95,10 @@ export const ProvenSection = () => {
                   <span>{c.industry}</span>
                   <span className='k'>{c.coord}</span>
                 </div>
-                <GeometricIcon name={c.icon} className='w-16 h-16 mb-4 opacity-60' />
+                <GeometricIcon name={c.icon} className='w-16 h-16 mb-5 opacity-60' />
                 <h3>{c.title}</h3>
                 <p>{c.body}</p>
-                <p className='bp-mono-accent' style={{ marginTop: 14 }}>
+                <p className='bp-mono-accent' style={{ marginTop: 18 }}>
                   {c.metric}
                 </p>
               </div>
@@ -103,7 +106,7 @@ export const ProvenSection = () => {
           </div>
         </div>
 
-        <div className='flex items-center gap-6 mt-6'>
+        <div className='flex items-center gap-6 mt-10'>
           <button
             className='bp-btn-text'
             onClick={() => scrollBy(-(CARD_WIDTH + CARD_GAP))}
