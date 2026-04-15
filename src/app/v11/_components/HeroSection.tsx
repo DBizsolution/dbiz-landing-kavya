@@ -46,72 +46,174 @@ export const HeroSection = () => (
   </section>
 )
 
+const layers = [
+  { label: 'STRATEGY', code: 'S·01' },
+  { label: 'ARCHITECTURE', code: 'S·02' },
+  { label: 'CLOUD', code: 'S·03' },
+  { label: 'DATA', code: 'S·04' },
+  { label: 'APPS', code: 'S·05' },
+  { label: 'AGENTS', code: 'S·06' },
+  { label: 'OPS', code: 'S·07' },
+] as const
+
 const HeroDiagram = () => (
-  <div className='relative w-full aspect-square max-w-[480px] ml-auto'>
+  <div className='relative w-full max-w-[520px] ml-auto'>
     <svg
-      viewBox='0 0 400 400'
+      viewBox='0 0 520 560'
       width='100%'
-      height='100%'
-      style={{ display: 'block' }}
+      xmlns='http://www.w3.org/2000/svg'
       aria-hidden
+      role='img'
+      style={{ display: 'block', height: 'auto' }}
     >
-      <rect x='8' y='8' width='384' height='384' fill='none' stroke='var(--bp-ink-frame)' strokeWidth='1' />
-      {[
-        [8, 8, 20, 8, 8, 20],
-        [392, 8, 380, 8, 392, 20],
-        [8, 392, 20, 392, 8, 380],
-        [392, 392, 380, 392, 392, 380],
-      ].map(([x1, y1, x2, y2, x3, y3], i) => (
-        <g key={i} stroke='var(--bp-ink-corner)' strokeWidth='1' fill='none'>
-          <line x1={x1} y1={y1} x2={x2} y2={y2} />
-          <line x1={x1} y1={y1} x2={x3} y2={y3} />
-        </g>
-      ))}
+      <defs>
+        <pattern id='v11-hero-hatch' patternUnits='userSpaceOnUse' width='6' height='6' patternTransform='rotate(45)'>
+          <line x1='0' y1='0' x2='0' y2='6' stroke='var(--bp-ink-hair)' strokeWidth='1' />
+        </pattern>
+        <pattern id='v11-hero-dot' patternUnits='userSpaceOnUse' width='10' height='10'>
+          <circle cx='1' cy='1' r='0.8' fill='var(--bp-ink-frame)' />
+        </pattern>
+      </defs>
 
-      <line x1='200' y1='8' x2='200' y2='392' stroke='var(--bp-ink-crosshair)' strokeWidth='1' strokeDasharray='3 4' />
-      <line x1='8' y1='200' x2='392' y2='200' stroke='var(--bp-ink-crosshair)' strokeWidth='1' strokeDasharray='3 4' />
+      {/* corner ticks */}
+      <g stroke='var(--bp-ink-frame)' strokeWidth='0.8'>
+        <line x1='20' y1='20' x2='40' y2='20' />
+        <line x1='20' y1='20' x2='20' y2='40' />
+        <line x1='500' y1='20' x2='480' y2='20' />
+        <line x1='500' y1='20' x2='500' y2='40' />
+        <line x1='20' y1='540' x2='40' y2='540' />
+        <line x1='20' y1='540' x2='20' y2='520' />
+        <line x1='500' y1='540' x2='480' y2='540' />
+        <line x1='500' y1='540' x2='500' y2='520' />
+      </g>
 
-      {[
-        { y: 70, label: 'A·01  Strategy' },
-        { y: 140, label: 'A·02  Cloud' },
-        { y: 210, label: 'A·03  Data' },
-        { y: 280, label: 'A·04  AI / Agents' },
-      ].map((layer, i) => (
-        <g key={i}>
-          <rect
-            x='60'
-            y={layer.y}
-            width='280'
-            height='50'
-            fill='none'
-            stroke={i === 2 ? 'var(--bp-ink-corner)' : 'var(--bp-ink-frame)'}
-            strokeWidth='1'
-          />
-          <text
-            x='70'
-            y={layer.y + 20}
-            fontFamily='var(--font-mono)'
-            fontSize='10'
-            letterSpacing='2'
-            fill='var(--bp-ink-3)'
-          >
-            {layer.label}
-          </text>
-          <rect
-            x='70'
-            y={layer.y + 28}
-            width='260'
-            height='1'
-            fill='var(--bp-ink-measure)'
-          />
-        </g>
-      ))}
+      {/* corner text labels */}
+      <text x='48' y='28' fontFamily='var(--font-mono)' fontSize='8.5' letterSpacing='1.5' fill='var(--bp-ink-3)'>
+        DWG · FRONTIER-ORG-01
+      </text>
+      <text x='492' y='28' fontFamily='var(--font-mono)' fontSize='8.5' letterSpacing='1.5' fill='var(--bp-ink-3)' textAnchor='end'>
+        REV.01
+      </text>
+      <text x='48' y='534' fontFamily='var(--font-mono)' fontSize='8.5' letterSpacing='1.5' fill='var(--bp-ink-3)'>
+        SCALE 1:1
+      </text>
+      <text x='492' y='534' fontFamily='var(--font-mono)' fontSize='8.5' letterSpacing='1.5' fill='var(--bp-ink-3)' textAnchor='end'>
+        SHEET .01
+      </text>
 
-      <circle cx='200' cy='200' r='28' fill='none' stroke='var(--bp-ink-corner)' strokeWidth='1' />
-      <circle cx='200' cy='200' r='4' fill='var(--bp-accent)' />
+      {/* left ruler ticks */}
+      <g stroke='var(--bp-ink-frame)' strokeWidth='0.6'>
+        {Array.from({ length: 14 }).map((_, i) => (
+          <line key={i} x1='40' y1={60 + i * 32} x2={i % 2 === 0 ? 48 : 44} y2={60 + i * 32} />
+        ))}
+      </g>
 
-      <text x='16' y='22' fontFamily='var(--font-mono)' fontSize='9' letterSpacing='1.5' fill='var(--bp-ink-3)'>FIG·01 · STACK</text>
-      <text x='336' y='386' fontFamily='var(--font-mono)' fontSize='9' letterSpacing='1.5' fill='var(--bp-ink-3)' textAnchor='end'>Ø 4 LAYERS</text>
+      {/* dotted inner field */}
+      <rect x='60' y='60' width='400' height='440' fill='url(#v11-hero-dot)' opacity='0.5' />
+
+      {/* 7 isometric slabs */}
+      {layers.map((layer, i) => {
+        const y = 90 + i * 56
+        const skew = 26
+        return (
+          <g key={layer.code}>
+            {/* top face (parallelogram) */}
+            <polygon
+              points={`${140},${y} ${360},${y} ${360 + skew},${y - 14} ${140 + skew},${y - 14}`}
+              fill='none'
+              stroke='var(--bp-ink-corner)'
+              strokeWidth='1'
+            />
+            {/* front face */}
+            <rect
+              x='140'
+              y={y}
+              width='220'
+              height='32'
+              fill={i === 3 ? 'url(#v11-hero-hatch)' : 'rgba(232,106,42,0.04)'}
+              stroke='var(--bp-ink-corner)'
+              strokeWidth='1'
+            />
+            {/* right face */}
+            <polygon
+              points={`${360},${y} ${360 + skew},${y - 14} ${360 + skew},${y + 18} ${360},${y + 32}`}
+              fill='rgba(255,255,255,0.02)'
+              stroke='var(--bp-ink-corner)'
+              strokeWidth='1'
+            />
+            {/* layer label */}
+            <text
+              x='156'
+              y={y + 20}
+              fontFamily='var(--font-sans)'
+              fontSize='10'
+              fontWeight='700'
+              letterSpacing='1.5'
+              fill='var(--bp-ink)'
+            >
+              {layer.label}
+            </text>
+            {/* callout leader */}
+            <line
+              x1={360 + skew}
+              y1={y + 8}
+              x2='450'
+              y2={y + 8}
+              stroke='var(--bp-ink-hair)'
+              strokeWidth='0.8'
+              strokeDasharray='2 2'
+            />
+            <circle cx={360 + skew} cy={y + 8} r='1.6' fill='var(--bp-accent)' />
+            <text
+              x='454'
+              y={y + 11}
+              fontFamily='var(--font-mono)'
+              fontSize='8.5'
+              letterSpacing='1'
+              fill='var(--bp-accent)'
+            >
+              {layer.code}
+            </text>
+          </g>
+        )
+      })}
+
+      {/* vertical dimension spine (left) */}
+      <g stroke='var(--bp-ink-hair)' strokeWidth='0.8'>
+        <line x1='96' y1='76' x2='96' y2='484' />
+        <line x1='92' y1='76' x2='100' y2='76' />
+        <line x1='92' y1='484' x2='100' y2='484' />
+      </g>
+      <text
+        x='80'
+        y='284'
+        fontFamily='var(--font-mono)'
+        fontSize='8.5'
+        letterSpacing='2'
+        fill='var(--bp-accent)'
+        transform='rotate(-90 80 284)'
+        textAnchor='middle'
+      >
+        FRONTIER ORG · STACK
+      </text>
+
+      {/* bottom dimension rule */}
+      <g stroke='var(--bp-ink-frame)' strokeWidth='0.6'>
+        <line x1='140' y1='520' x2='360' y2='520' />
+        <line x1='140' y1='516' x2='140' y2='524' />
+        <line x1='360' y1='516' x2='360' y2='524' />
+      </g>
+      <text
+        x='250'
+        y='515'
+        fontFamily='var(--font-mono)'
+        fontSize='8'
+        letterSpacing='1.5'
+        fill='var(--bp-ink-3)'
+        textAnchor='middle'
+      >
+        DIM: 7 × LAYER
+      </text>
     </svg>
   </div>
 )
