@@ -39,7 +39,7 @@
 
   /* Light-section duotone accents (local derivations, per spec) */
   --v11-duotone-orange: #f97316;
-  --v11-duotone-blue: #3b82f6;
+  --v11-duotone-blue: var(--brand-navy);
 
   background: var(--bp-paper);
   color: var(--bp-ink);
@@ -64,7 +64,7 @@
 
 /* BEIGE variant — wrap section with data-surface='beige' to flip ink. */
 .v11-scope [data-surface='beige'] {
-  --bp-paper: var(--brand-bg-warm);
+  --bp-paper: #ffffff;
   --bp-ink: #1d1b17;
   --bp-ink-2: rgba(29, 27, 23, 0.72);
   --bp-ink-3: rgba(29, 27, 23, 0.48);
