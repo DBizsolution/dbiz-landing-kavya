@@ -37,13 +37,13 @@ export const AiFrameworkDiagram = () => {
 
   return (
     <div className='relative'>
-      <div className='grid gap-10 lg:grid-cols-[1fr_320px] items-start'>
-        <div className='overflow-x-auto' style={{ minHeight: DIAGRAM_H }}>
+      <div className='grid gap-10 xl:grid-cols-[1fr_320px] items-start'>
+        <div className='relative w-full'>
           <svg
             viewBox={`0 0 ${DIAGRAM_W} ${DIAGRAM_H}`}
             width='100%'
-            height={DIAGRAM_H}
-            style={{ minWidth: DIAGRAM_W, display: 'block' }}
+            style={{ display: 'block', height: 'auto' }}
+            preserveAspectRatio='xMidYMid meet'
             role='group'
             aria-label='AI Transformation Framework — four layers left to right'
           >
