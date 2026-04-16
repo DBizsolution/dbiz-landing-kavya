@@ -1656,16 +1656,25 @@
   50% { opacity: 1; }
 }
 
-/* Node hover */
+/* Node hover + transitions */
 .v14-why-node-circle {
-  transition: all 0.3s ease;
+  transition: all 0.35s ease;
 }
 .v14-why-node:hover .v14-why-node-circle {
   stroke: #E86A2A;
-  stroke-width: 2;
+  stroke-width: 2.5;
+  filter: url(#v14-why-glow);
 }
 .v14-why-spoke {
-  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+  transition: all 0.35s ease;
+}
+/* Active ring spin */
+.v14-why-active-ring {
+  animation: v14-why-ring-spin 8s linear infinite;
+  transform-origin: center;
+}
+@keyframes v14-why-ring-spin {
+  to { transform: rotate(360deg); }
 }
 
 /* Detail panel */
