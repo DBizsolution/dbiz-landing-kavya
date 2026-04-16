@@ -1851,17 +1851,17 @@
   z-index: 2;
   pointer-events: none;
 }
-.v14-corner.tl { top: 24px; left: var(--v14-gutter); border-right: none; border-bottom: none; }
-.v14-corner.tr { top: 24px; right: var(--v14-gutter); border-left: none; border-bottom: none; }
-.v14-corner.bl { bottom: 24px; left: var(--v14-gutter); border-right: none; border-top: none; }
-.v14-corner.br { bottom: 24px; right: var(--v14-gutter); border-left: none; border-top: none; }
+.v14-corner.tl { top: 28px; left: 28px; border-right: none; border-bottom: none; }
+.v14-corner.tr { top: 28px; right: 28px; border-left: none; border-bottom: none; }
+.v14-corner.bl { bottom: 28px; left: 28px; border-right: none; border-top: none; }
+.v14-corner.br { bottom: 28px; right: 28px; border-left: none; border-top: none; }
 
 .v14-cta-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: var(--v14-col-gap);
   align-items: end;
-  padding: 40px 0;
+  padding: 56px 24px;
 }
 .v14-cta-num {
   grid-column: 1 / 3;
