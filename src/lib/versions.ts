@@ -43,18 +43,6 @@ export const versions: Version[] = [
     status: 'ready',
   },
   {
-    slug: 'v7',
-    name: 'V7 — Monument',
-    tagline: 'Architectural tiles, stacked display, Pentagram-scale type',
-    status: 'ready',
-  },
-  {
-    slug: 'v8',
-    name: 'V8 — Broadsheet (Sans)',
-    tagline: 'V6 broadsheet structure, rendered entirely in DM Sans',
-    status: 'ready',
-  },
-  {
     slug: 'v9',
     name: 'V9 — Foundry',
     tagline: 'v5 illustrations, v4 content, navy/light handshake',

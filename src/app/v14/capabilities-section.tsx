@@ -1,6 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
+const CYCLE_MS = 5000
 
 type Capability = {
   num: string
@@ -86,43 +88,11 @@ type StackRow = {
 
 const stackRows: StackRow[] = [
   {
-    layer: 'Strategy',
-    idx: '01',
-    products: [
-      { name: 'Futures Studio', desc: 'AI ambition, roadmap & use case prioritisation' },
-      { name: 'DBiz Canvas', desc: 'Concept to code in days' },
-    ],
-  },
-  {
-    layer: 'Architecture',
-    idx: '02',
-    products: [
-      { name: 'TechOffice Foundry', desc: 'AI foundation & Well-Architected review' },
-      { name: 'DBiz Adapt', desc: 'Architecting Secure and Sovereign AI' },
-    ],
-  },
-  {
-    layer: 'Cloud',
-    idx: '03',
-    products: [
-      { name: 'Multi-Cloud AI Foundation', desc: 'Enterprise AI Foundation rollout' },
-      { name: 'DBiz Scoop', desc: 'AI-Powered migration pipeline' },
-    ],
-  },
-  {
     layer: 'Data & Insights',
-    idx: '04',
+    idx: '07',
     products: [
       { name: 'Factweavers.ai', desc: 'Domain data cloud & quick insights' },
       { name: 'DBiz Compass', desc: 'AI-infused data engineering' },
-    ],
-  },
-  {
-    layer: 'AI Engineering',
-    idx: '05',
-    products: [
-      { name: 'Nexus Platform', desc: 'Enterprise AI dev environment' },
-      { name: 'Perpetual Engineering', desc: 'AI agents across the full SDLC' },
     ],
   },
   {
@@ -135,10 +105,42 @@ const stackRows: StackRow[] = [
   },
   {
     layer: 'Productivity',
-    idx: '07',
+    idx: '05',
     products: [
       { name: 'Productivity Automation', desc: 'Claude Co-work & Copilot' },
       { name: 'AI-Infused BizApps', desc: 'Autonomous agents for SaaS platforms' },
+    ],
+  },
+  {
+    layer: 'Development',
+    idx: '04',
+    products: [
+      { name: 'Nexus Platform', desc: 'Enterprise AI dev environment' },
+      { name: 'Perpetual Engineering', desc: 'AI agents across the full SDLC' },
+    ],
+  },
+  {
+    layer: 'Cloud',
+    idx: '03',
+    products: [
+      { name: 'Multi-Cloud AI Foundation', desc: 'Enterprise AI Foundation rollout' },
+      { name: 'DBiz Scoop', desc: 'AI-Powered migration pipeline' },
+    ],
+  },
+  {
+    layer: 'Architecture',
+    idx: '02',
+    products: [
+      { name: 'TechOffice Foundry', desc: 'AI foundation & Well-Architected review' },
+      { name: 'DBiz Adapt', desc: 'Architecting Secure and Sovereign AI' },
+    ],
+  },
+  {
+    layer: 'Strategy',
+    idx: '01',
+    products: [
+      { name: 'Futures Studio', desc: 'AI ambition, roadmap & use case prioritisation' },
+      { name: 'DBiz Canvas', desc: 'Concept to code in days' },
     ],
   },
 ]
@@ -278,80 +280,82 @@ function CapIcon({ index }: { index: number }) {
   const icons = [
     /* 0 Strategy.target */
     <svg key={0} viewBox='0 0 80 80' fill='none' xmlns='http://www.w3.org/2000/svg'>
-      <circle cx='40' cy='40' r='34' stroke='var(--v14-ink-corner)' strokeWidth='1.2' strokeDasharray='4 3' />
-      <circle cx='40' cy='40' r='24' stroke='var(--v14-ink-corner)' strokeWidth='1.2' />
-      <circle cx='40' cy='40' r='14' stroke='var(--v14-accent)' strokeWidth='1.5' />
-      <circle cx='40' cy='40' r='4' fill='var(--v14-accent)' />
-      <line x1='40' y1='2' x2='40' y2='16' stroke='var(--v14-ink-corner)' strokeWidth='0.8' />
-      <line x1='40' y1='64' x2='40' y2='78' stroke='var(--v14-ink-corner)' strokeWidth='0.8' />
-      <line x1='2' y1='40' x2='16' y2='40' stroke='var(--v14-ink-corner)' strokeWidth='0.8' />
-      <line x1='64' y1='40' x2='78' y2='40' stroke='var(--v14-ink-corner)' strokeWidth='0.8' />
-      <circle cx='40' cy='6' r='2' fill='var(--v14-accent)' className='v14-icon-pulse' />
+      <circle cx='40' cy='40' r='35' stroke='var(--v14-ink-corner)' strokeWidth='1' strokeDasharray='4 3' className='v14-icon-circle-draw v14-icon-delay-1' />
+      <circle cx='40' cy='40' r='24' stroke='var(--v14-ink-corner)' strokeWidth='1.2' className='v14-icon-circle-draw v14-icon-delay-2' />
+      <circle cx='40' cy='40' r='14' stroke='var(--v14-accent)' strokeWidth='1.5' className='v14-icon-circle-draw v14-icon-delay-3' />
+      <circle cx='40' cy='40' r='4' fill='var(--v14-accent)' className='v14-icon-scale-in v14-icon-delay-4' />
+      <line x1='40' y1='3' x2='40' y2='15' stroke='var(--v14-ink-corner)' strokeWidth='0.8' className='v14-icon-line-draw v14-icon-delay-3' />
+      <line x1='40' y1='65' x2='40' y2='77' stroke='var(--v14-ink-corner)' strokeWidth='0.8' className='v14-icon-line-draw v14-icon-delay-3' />
+      <line x1='3' y1='40' x2='15' y2='40' stroke='var(--v14-ink-corner)' strokeWidth='0.8' className='v14-icon-line-draw v14-icon-delay-3' />
+      <line x1='65' y1='40' x2='77' y2='40' stroke='var(--v14-ink-corner)' strokeWidth='0.8' className='v14-icon-line-draw v14-icon-delay-3' />
+      <circle cx='40' cy='5' r='2' fill='var(--v14-accent)' className='v14-icon-pulse v14-icon-scale-in v14-icon-delay-5' />
     </svg>,
-    /* 1 Cloud.cube */
+    /* 1 Cloud.layers */
     <svg key={1} viewBox='0 0 80 80' fill='none' xmlns='http://www.w3.org/2000/svg'>
-      <rect x='16' y='16' width='48' height='48' stroke='var(--v14-ink-corner)' strokeWidth='1.2' strokeDasharray='4 3' />
-      <polygon points='40,14 64,28 64,52 40,66 16,52 16,28' stroke='var(--v14-ink-corner)' strokeWidth='1.2' fill='none' />
-      <line x1='40' y1='14' x2='40' y2='66' stroke='var(--v14-ink-corner)' strokeWidth='0.8' />
-      <polygon points='40,28 56,36 56,52 40,60 24,52 24,36' stroke='var(--v14-accent)' strokeWidth='1.5' fill='none' />
-      <rect x='34' y='34' width='12' height='12' fill='var(--v14-accent)' opacity='0.2' stroke='var(--v14-accent)' strokeWidth='1' />
-      <circle cx='40' cy='28' r='2.5' fill='var(--v14-accent)' className='v14-icon-pulse' />
+      <circle cx='40' cy='40' r='35' stroke='var(--v14-ink-corner)' strokeWidth='0.8' strokeDasharray='4 3' className='v14-icon-circle-draw v14-icon-delay-1' />
+      <path d='M 20 48 L 40 38 L 60 48 L 40 58 Z' stroke='var(--v14-ink-corner)' strokeWidth='1.2' fill='none' className='v14-icon-polygon-draw v14-icon-delay-2' />
+      <path d='M 24 40 L 40 32 L 56 40 L 40 48 Z' stroke='var(--v14-ink-corner)' strokeWidth='1.2' fill='none' className='v14-icon-polygon-draw v14-icon-delay-3' />
+      <path d='M 28 32 L 40 26 L 52 32 L 40 38 Z' stroke='var(--v14-accent)' strokeWidth='1.5' fill='none' className='v14-icon-polygon-draw v14-icon-delay-4' />
+      <line x1='40' y1='26' x2='40' y2='58' stroke='var(--v14-ink-corner)' strokeWidth='0.8' strokeDasharray='2 2' className='v14-icon-line-draw v14-icon-delay-5' />
+      <circle cx='40' cy='29' r='2.5' fill='var(--v14-accent)' className='v14-icon-scale-in v14-icon-delay-6' />
+      <circle cx='28' cy='32' r='1.5' fill='var(--v14-accent)' opacity='0.6' className='v14-icon-scale-in v14-icon-delay-6' />
+      <circle cx='52' cy='32' r='1.5' fill='var(--v14-accent)' opacity='0.6' className='v14-icon-scale-in v14-icon-delay-6' />
     </svg>,
     /* 2 Data.hexagon */
     <svg key={2} viewBox='0 0 80 80' fill='none' xmlns='http://www.w3.org/2000/svg'>
-      <circle cx='40' cy='40' r='34' stroke='var(--v14-ink-corner)' strokeWidth='0.8' strokeDasharray='4 3' />
-      <polygon points='40,10 66,25 66,55 40,70 14,55 14,25' stroke='var(--v14-ink-corner)' strokeWidth='1.2' fill='none' />
-      <polygon points='40,22 54,30 54,46 40,54 26,46 26,30' stroke='var(--v14-accent)' strokeWidth='1.5' fill='none' />
-      <circle cx='40' cy='40' r='6' fill='var(--v14-accent)' opacity='0.15' stroke='var(--v14-accent)' strokeWidth='1.2' />
-      <circle cx='40' cy='40' r='2.5' fill='var(--v14-accent)' />
+      <circle cx='40' cy='40' r='35' stroke='var(--v14-ink-corner)' strokeWidth='0.8' strokeDasharray='4 3' className='v14-icon-circle-draw v14-icon-delay-1' />
+      <polygon points='40,8 68,23 68,57 40,72 12,57 12,23' stroke='var(--v14-ink-corner)' strokeWidth='1.2' fill='none' className='v14-icon-polygon-draw v14-icon-delay-2' />
+      <polygon points='40,20 56,29 56,51 40,60 24,51 24,29' stroke='var(--v14-accent)' strokeWidth='1.5' fill='none' className='v14-icon-polygon-draw v14-icon-delay-3' />
+      <circle cx='40' cy='40' r='6' fill='var(--v14-accent)' opacity='0.15' stroke='var(--v14-accent)' strokeWidth='1.2' className='v14-icon-fade-in-el v14-icon-delay-4' />
+      <circle cx='40' cy='40' r='2.5' fill='var(--v14-accent)' className='v14-icon-scale-in v14-icon-delay-5' />
       {[0, 60, 120, 180, 240, 300].map((a, i) => {
         const r = (a - 90) * Math.PI / 180
-        return <circle key={i} cx={40 + Math.cos(r) * 16} cy={40 + Math.sin(r) * 16} r='2' fill='var(--v14-accent)' opacity='0.6' />
+        return <circle key={i} cx={40 + Math.cos(r) * 14} cy={40 + Math.sin(r) * 14} r='2' fill='var(--v14-accent)' opacity='0.6' className='v14-icon-scale-in' style={{ animationDelay: `${0.6 + i * 0.08}s` }} />
       })}
     </svg>,
     /* 3 Apps.nodes */
     <svg key={3} viewBox='0 0 80 80' fill='none' xmlns='http://www.w3.org/2000/svg'>
-      <rect x='8' y='8' width='64' height='64' stroke='var(--v14-ink-corner)' strokeWidth='0.8' strokeDasharray='4 3' />
-      <line x1='20' y1='28' x2='40' y2='40' stroke='var(--v14-ink-corner)' strokeWidth='1.2' />
-      <line x1='60' y1='28' x2='40' y2='40' stroke='var(--v14-ink-corner)' strokeWidth='1.2' />
-      <line x1='20' y1='56' x2='40' y2='40' stroke='var(--v14-ink-corner)' strokeWidth='1.2' />
-      <line x1='60' y1='56' x2='40' y2='40' stroke='var(--v14-ink-corner)' strokeWidth='1.2' />
-      <rect x='12' y='20' width='16' height='16' stroke='var(--v14-ink-corner)' strokeWidth='1.2' fill='none' />
-      <rect x='52' y='20' width='16' height='16' stroke='var(--v14-ink-corner)' strokeWidth='1.2' fill='none' />
-      <rect x='12' y='48' width='16' height='16' stroke='var(--v14-ink-corner)' strokeWidth='1.2' fill='none' />
-      <rect x='52' y='48' width='16' height='16' stroke='var(--v14-ink-corner)' strokeWidth='1.2' fill='none' />
-      <circle cx='40' cy='40' r='8' stroke='var(--v14-accent)' strokeWidth='1.5' fill='none' />
-      <circle cx='40' cy='40' r='3' fill='var(--v14-accent)' />
+      <circle cx='40' cy='40' r='35' stroke='var(--v14-ink-corner)' strokeWidth='0.8' strokeDasharray='4 3' className='v14-icon-circle-draw v14-icon-delay-1' />
+      <line x1='20' y1='27' x2='32' y2='40' stroke='var(--v14-ink-corner)' strokeWidth='1' className='v14-icon-line-draw v14-icon-delay-3' />
+      <line x1='60' y1='27' x2='48' y2='40' stroke='var(--v14-ink-corner)' strokeWidth='1' className='v14-icon-line-draw v14-icon-delay-3' />
+      <line x1='20' y1='53' x2='32' y2='40' stroke='var(--v14-ink-corner)' strokeWidth='1' className='v14-icon-line-draw v14-icon-delay-4' />
+      <line x1='60' y1='53' x2='48' y2='40' stroke='var(--v14-ink-corner)' strokeWidth='1' className='v14-icon-line-draw v14-icon-delay-4' />
+      <rect x='12' y='19' width='16' height='16' stroke='var(--v14-ink-corner)' strokeWidth='1.2' fill='none' className='v14-icon-rect-draw v14-icon-delay-2' />
+      <rect x='52' y='19' width='16' height='16' stroke='var(--v14-ink-corner)' strokeWidth='1.2' fill='none' className='v14-icon-rect-draw v14-icon-delay-2' />
+      <rect x='12' y='45' width='16' height='16' stroke='var(--v14-ink-corner)' strokeWidth='1.2' fill='none' className='v14-icon-rect-draw v14-icon-delay-2' />
+      <rect x='52' y='45' width='16' height='16' stroke='var(--v14-ink-corner)' strokeWidth='1.2' fill='none' className='v14-icon-rect-draw v14-icon-delay-2' />
+      <circle cx='40' cy='40' r='8' stroke='var(--v14-accent)' strokeWidth='1.5' fill='none' className='v14-icon-circle-draw v14-icon-delay-5' />
+      <circle cx='40' cy='40' r='3' fill='var(--v14-accent)' className='v14-icon-scale-in v14-icon-delay-6' />
     </svg>,
     /* 4 Product.orbital */
     <svg key={4} viewBox='0 0 80 80' fill='none' xmlns='http://www.w3.org/2000/svg'>
-      <circle cx='40' cy='40' r='34' stroke='var(--v14-ink-corner)' strokeWidth='0.8' strokeDasharray='4 3' />
-      <circle cx='40' cy='40' r='26' stroke='var(--v14-ink-corner)' strokeWidth='1.2' />
-      <circle cx='40' cy='40' r='18' stroke='var(--v14-accent)' strokeWidth='1.5' />
-      <circle cx='40' cy='40' r='3' fill='var(--v14-accent)' />
-      <ellipse cx='40' cy='40' rx='34' ry='14' stroke='var(--v14-ink-corner)' strokeWidth='0.8' transform='rotate(30 40 40)' />
-      <circle cx='62' cy='20' r='3' fill='var(--v14-accent)' className='v14-icon-pulse' />
+      <circle cx='40' cy='40' r='35' stroke='var(--v14-ink-corner)' strokeWidth='0.8' strokeDasharray='4 3' className='v14-icon-circle-draw v14-icon-delay-1' />
+      <circle cx='40' cy='40' r='26' stroke='var(--v14-ink-corner)' strokeWidth='1.2' className='v14-icon-circle-draw v14-icon-delay-2' />
+      <circle cx='40' cy='40' r='17' stroke='var(--v14-accent)' strokeWidth='1.5' className='v14-icon-circle-draw v14-icon-delay-3' />
+      <circle cx='40' cy='40' r='3' fill='var(--v14-accent)' className='v14-icon-scale-in v14-icon-delay-5' />
+      <ellipse cx='40' cy='40' rx='35' ry='14' stroke='var(--v14-ink-corner)' strokeWidth='0.8' transform='rotate(30 40 40)' className='v14-icon-circle-draw v14-icon-delay-4' />
+      <circle cx='62.5' cy='20' r='2.5' fill='var(--v14-accent)' className='v14-icon-pulse v14-icon-scale-in v14-icon-delay-6' />
     </svg>,
     /* 5 Ops.radar */
     <svg key={5} viewBox='0 0 80 80' fill='none' xmlns='http://www.w3.org/2000/svg'>
-      <circle cx='40' cy='40' r='34' stroke='var(--v14-ink-corner)' strokeWidth='1.2' />
-      <circle cx='40' cy='40' r='24' stroke='var(--v14-ink-corner)' strokeWidth='0.8' strokeDasharray='4 3' />
-      <circle cx='40' cy='40' r='14' stroke='var(--v14-ink-corner)' strokeWidth='0.8' strokeDasharray='4 3' />
-      <line x1='40' y1='6' x2='40' y2='74' stroke='var(--v14-ink-corner)' strokeWidth='0.6' />
-      <line x1='6' y1='40' x2='74' y2='40' stroke='var(--v14-ink-corner)' strokeWidth='0.6' />
-      <path d='M 40 40 L 40 6' stroke='var(--v14-accent)' strokeWidth='2' />
-      <circle cx='40' cy='40' r='3' fill='var(--v14-accent)' />
-      <circle cx='52' cy='24' r='2.5' fill='var(--v14-accent)' className='v14-icon-pulse' />
+      <circle cx='40' cy='40' r='35' stroke='var(--v14-ink-corner)' strokeWidth='1.2' className='v14-icon-circle-draw v14-icon-delay-1' />
+      <circle cx='40' cy='40' r='24' stroke='var(--v14-ink-corner)' strokeWidth='0.8' strokeDasharray='4 3' className='v14-icon-circle-draw v14-icon-delay-2' />
+      <circle cx='40' cy='40' r='13' stroke='var(--v14-ink-corner)' strokeWidth='0.8' strokeDasharray='4 3' className='v14-icon-circle-draw v14-icon-delay-3' />
+      <line x1='40' y1='5' x2='40' y2='75' stroke='var(--v14-ink-corner)' strokeWidth='0.6' className='v14-icon-line-draw v14-icon-delay-4' />
+      <line x1='5' y1='40' x2='75' y2='40' stroke='var(--v14-ink-corner)' strokeWidth='0.6' className='v14-icon-line-draw v14-icon-delay-4' />
+      <path d='M 40 40 L 40 5' stroke='var(--v14-accent)' strokeWidth='2' className='v14-icon-line-draw v14-icon-delay-5' />
+      <circle cx='40' cy='40' r='3' fill='var(--v14-accent)' className='v14-icon-scale-in v14-icon-delay-6' />
+      <circle cx='54' cy='22' r='2.5' fill='var(--v14-accent)' className='v14-icon-pulse v14-icon-scale-in v14-icon-delay-7' />
     </svg>,
     /* 6 Governance.shield */
     <svg key={6} viewBox='0 0 80 80' fill='none' xmlns='http://www.w3.org/2000/svg'>
-      <rect x='12' y='12' width='56' height='56' stroke='var(--v14-ink-corner)' strokeWidth='0.8' strokeDasharray='4 3' />
-      <path d='M 40 8 L 68 22 L 68 48 L 40 72 L 12 48 L 12 22 Z' stroke='var(--v14-ink-corner)' strokeWidth='1.2' fill='none' />
-      <path d='M 40 18 L 58 28 L 58 44 L 40 58 L 22 44 L 22 28 Z' stroke='var(--v14-accent)' strokeWidth='1.5' fill='none' />
-      <line x1='40' y1='18' x2='40' y2='58' stroke='var(--v14-ink-corner)' strokeWidth='0.8' strokeDasharray='2 2' />
-      <line x1='22' y1='36' x2='58' y2='36' stroke='var(--v14-ink-corner)' strokeWidth='0.8' strokeDasharray='2 2' />
-      <circle cx='40' cy='36' r='6' fill='var(--v14-accent)' opacity='0.15' stroke='var(--v14-accent)' strokeWidth='1.2' />
-      <circle cx='40' cy='36' r='2.5' fill='var(--v14-accent)' />
+      <circle cx='40' cy='40' r='35' stroke='var(--v14-ink-corner)' strokeWidth='0.8' strokeDasharray='4 3' className='v14-icon-circle-draw v14-icon-delay-1' />
+      <path d='M 40 6 L 70 21 L 70 51 L 40 74 L 10 51 L 10 21 Z' stroke='var(--v14-ink-corner)' strokeWidth='1.2' fill='none' className='v14-icon-polygon-draw v14-icon-delay-2' />
+      <path d='M 40 16 L 60 27 L 60 49 L 40 62 L 20 49 L 20 27 Z' stroke='var(--v14-accent)' strokeWidth='1.5' fill='none' className='v14-icon-polygon-draw v14-icon-delay-3' />
+      <line x1='40' y1='16' x2='40' y2='62' stroke='var(--v14-ink-corner)' strokeWidth='0.8' strokeDasharray='2 2' className='v14-icon-line-draw v14-icon-delay-4' />
+      <line x1='20' y1='38' x2='60' y2='38' stroke='var(--v14-ink-corner)' strokeWidth='0.8' strokeDasharray='2 2' className='v14-icon-line-draw v14-icon-delay-4' />
+      <circle cx='40' cy='38' r='6' fill='var(--v14-accent)' opacity='0.15' stroke='var(--v14-accent)' strokeWidth='1.2' className='v14-icon-fade-in-el v14-icon-delay-5' />
+      <circle cx='40' cy='38' r='2.5' fill='var(--v14-accent)' className='v14-icon-scale-in v14-icon-delay-6' />
     </svg>,
   ]
   return icons[index] || icons[0]
@@ -361,6 +365,15 @@ export default function CapabilitiesSection() {
   const [active, setActive] = useState(0)
   const [view, setView] = useState<'capabilities' | 'framework'>('capabilities')
   const cap = capabilities[active]
+
+  // Auto-cycle through capabilities
+  useEffect(() => {
+    if (view !== 'capabilities') return
+    const id = setTimeout(() => {
+      setActive((i) => (i + 1) % capabilities.length)
+    }, CYCLE_MS)
+    return () => clearTimeout(id)
+  }, [active, view])
 
   return (
     <section className='v14-section' id='solutions'>
@@ -404,6 +417,7 @@ export default function CapabilitiesSection() {
                     <span className='tab-title'>{c.title}</span>
                     <span className='tab-kicker'>{c.kicker}</span>
                   </span>
+                  <span className='v14-cap-tab-progress' />
                 </button>
               ))}
             </div>
@@ -433,6 +447,7 @@ export default function CapabilitiesSection() {
               >
                 →
               </button>
+              <span className='v14-cap-mobile-progress' />
             </div>
 
             {/* Detail panel — content left, icon column right */}
@@ -449,8 +464,8 @@ export default function CapabilitiesSection() {
                     <span key={tag} className='v14-cap-pill'>{tag}</span>
                   ))}
                 </div>
-                <a href='#cta' className='v14-cap-cta'>
-                  {cap.cta} <span className='arrow'>&rarr;</span>
+                <a href='#cta' className='v14-cta-secondary'>
+                  See our work <span className='arrow'>&rarr;</span>
                 </a>
               </div>
               <div className='v14-cap-detail-icon'>
