@@ -74,8 +74,8 @@ export const versions: Version[] = [
   },
   {
     slug: 'v16',
-    name: 'V16 — Swiss Blueprint Complete',
-    tagline: 'Full V14 implementation with all sections and interactions',
+    name: 'V16 — Swiss Blueprint',
+    tagline: 'Complete Swiss Blueprint with all sections and interactions',
     status: 'ready',
   },
 ]
