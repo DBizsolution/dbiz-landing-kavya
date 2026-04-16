@@ -80,86 +80,49 @@ const capabilities: Capability[] = [
   },
 ]
 
-type StackRow = {
-  layer: string
-  idx: string
-  products: { name: string; desc: string }[]
-}
 
-const stackRows: StackRow[] = [
-  {
-    layer: 'Data & Insights',
-    idx: '07',
-    products: [
-      { name: 'Factweavers.ai', desc: 'Domain data cloud & quick insights' },
-      { name: 'DBiz Compass', desc: 'AI-infused data engineering' },
-    ],
-  },
-  {
-    layer: 'Orchestration',
-    idx: '06',
-    products: [
-      { name: 'Agent Studio', desc: 'Agentic AI & multi-agent orchestration' },
-      { name: 'Nexus iConnector', desc: 'No rip & replace integration' },
-    ],
-  },
-  {
-    layer: 'Productivity',
-    idx: '05',
-    products: [
-      { name: 'Productivity Automation', desc: 'Claude Co-work & Copilot' },
-      { name: 'AI-Infused BizApps', desc: 'Autonomous agents for SaaS platforms' },
-    ],
-  },
-  {
-    layer: 'Development',
-    idx: '04',
-    products: [
-      { name: 'Nexus Platform', desc: 'Enterprise AI dev environment' },
-      { name: 'Perpetual Engineering', desc: 'AI agents across the full SDLC' },
-    ],
-  },
-  {
-    layer: 'Cloud',
-    idx: '03',
-    products: [
-      { name: 'Multi-Cloud AI Foundation', desc: 'Enterprise AI Foundation rollout' },
-      { name: 'DBiz Scoop', desc: 'AI-Powered migration pipeline' },
-    ],
-  },
-  {
-    layer: 'Architecture',
-    idx: '02',
-    products: [
-      { name: 'TechOffice Foundry', desc: 'AI foundation & Well-Architected review' },
-      { name: 'DBiz Adapt', desc: 'Architecting Secure and Sovereign AI' },
-    ],
-  },
-  {
-    layer: 'Strategy',
-    idx: '01',
-    products: [
-      { name: 'Futures Studio', desc: 'AI ambition, roadmap & use case prioritisation' },
-      { name: 'DBiz Canvas', desc: 'Concept to code in days' },
-    ],
-  },
-]
-
-/* ─── Stack Diagram SVG — Vertical Exploded Isometric ─── */
+/* ─── Stack Diagram SVG — Angled Exploded Isometric ─── */
 function StackDiagram() {
-  /* Wide, thin, tilted slabs stacked top→bottom with left/right callouts */
-  const slabW = 300   /* wide front face */
-  const slabH = 22    /* thin */
-  const skew = 46     /* isometric depth tilt */
-  const skewY = 11    /* vertical offset for tilt */
-  const gap = 62      /* vertical gap between slabs */
-  const startY = 60
-  const cx = 440      /* horizontal center of slab stack */
-  const svgH = startY + 7 * gap + slabH + 50
+  /* Angled exploded view matching the reference image */
+  const svgH = 700
+
+  // Define layers from bottom to top in isometric grid
+  // Each layer moves up by 75px and right by 40px to maintain isometric alignment
+  const baseX = 200
+  const baseY = 580
+  const verticalGap = 75
+  const horizontalShift = 40
+
+  const layers = [
+    { label: 'STRATEGY', x: baseX, y: baseY, w: 220, h: 50, products: [
+      { name: 'Futures Studio', desc: ['AI ambition, roadmap &', 'use case prioritisation'], side: 'left' },
+      { name: 'TechOffice Foundry', desc: 'AI foundation & Well-Architected review', side: 'right' }
+    ]},
+    { label: 'ARCHITECTURE', x: baseX + horizontalShift, y: baseY - verticalGap, w: 240, h: 50, products: [
+      { name: 'DBiz Adapt', desc: 'Architecting Secure and Sovereign AI', side: 'right' }
+    ]},
+    { label: 'CLOUD', x: baseX + horizontalShift * 2, y: baseY - verticalGap * 2, w: 260, h: 50, products: [
+      { name: 'DBiz Scoop', desc: 'AI-Powered migration pipeline', side: 'right' }
+    ]},
+    { label: 'DEVELOPMENT', x: baseX + horizontalShift * 3, y: baseY - verticalGap * 3, w: 240, h: 50, products: [
+      { name: 'Perpetual Engineering', desc: 'AI agents across the full SDLC', side: 'right' }
+    ]},
+    { label: 'PRODUCTIVITY', x: baseX + horizontalShift * 4, y: baseY - verticalGap * 4, w: 260, h: 50, products: [
+      { name: 'Productivity Automation', desc: 'Claude Co-work & Copilot', side: 'left' }
+    ]},
+    { label: 'ORCHESTRATION', x: baseX + horizontalShift * 5, y: baseY - verticalGap * 5, w: 280, h: 50, products: [
+      { name: 'Agent Studio', desc: 'Agentic AI & multi-agent orchestration', side: 'left' },
+      { name: 'AI-Infused BizApps', desc: 'Autonomous agents for SaaS platforms', side: 'right' }
+    ]},
+    { label: 'DATA & INSIGHTS', x: baseX + horizontalShift * 6, y: baseY - verticalGap * 6, w: 300, h: 50, products: [
+      { name: 'Factweavers.ai', desc: 'Domain data cloud & quick insights', side: 'left' },
+      { name: 'DBiz Compass', desc: 'AI-infused data engineering', side: 'right' }
+    ]},
+  ]
 
   return (
     <svg
-      viewBox={`0 0 900 ${svgH}`}
+      viewBox='0 0 1000 700'
       xmlns='http://www.w3.org/2000/svg'
       className='v16-stack-diagram'
       aria-label='DBiz AI Transformation Stack — Exploded View'
@@ -172,105 +135,125 @@ function StackDiagram() {
           <feGaussianBlur stdDeviation='2' result='coloredBlur' />
           <feMerge><feMergeNode in='coloredBlur' /><feMergeNode in='SourceGraphic' /></feMerge>
         </filter>
-        <pattern id='v16-ex-hatch' patternUnits='userSpaceOnUse' width='6' height='6' patternTransform='rotate(45)'>
-          <line x1='0' y1='0' x2='0' y2='6' stroke='var(--v16-ink-hatch)' strokeWidth='0.8' />
-        </pattern>
       </defs>
 
       {/* Frame + dot background */}
-      <rect x='8' y='8' width='884' height={svgH - 16} fill='url(#v16-ex-dot)' />
-      <rect x='8' y='8' width='884' height={svgH - 16} fill='none' stroke='var(--v16-ink-frame)' strokeWidth='1' />
+      <rect x='8' y='8' width='984' height='684' fill='url(#v16-ex-dot)' />
+      <rect x='8' y='8' width='984' height='684' fill='none' stroke='var(--v16-ink-frame)' strokeWidth='1' />
       <g stroke='var(--v16-ink-corner)' strokeWidth='2'>
         <line x1='8' y1='8' x2='26' y2='8' /><line x1='8' y1='8' x2='8' y2='26' />
-        <line x1='892' y1='8' x2='874' y2='8' /><line x1='892' y1='8' x2='892' y2='26' />
-        <line x1='8' y1={svgH - 8} x2='26' y2={svgH - 8} /><line x1='8' y1={svgH - 8} x2='8' y2={svgH - 26} />
-        <line x1='892' y1={svgH - 8} x2='874' y2={svgH - 8} /><line x1='892' y1={svgH - 8} x2='892' y2={svgH - 26} />
+        <line x1='992' y1='8' x2='974' y2='8' /><line x1='992' y1='8' x2='992' y2='26' />
+        <line x1='8' y1='692' x2='26' y2='692' /><line x1='8' y1='692' x2='8' y2='674' />
+        <line x1='992' y1='692' x2='974' y2='692' /><line x1='992' y1='692' x2='992' y2='674' />
       </g>
 
       {/* Drawing label + annotations */}
-      <text x='450' y='28' fontFamily='var(--font-mono)' fontSize='7.5' fill='var(--v16-ink-label-strong)' textAnchor='middle' letterSpacing='2'>DWG·STACK-01 &nbsp; EXPLODED VIEW</text>
-      <text x='876' y='28' fontFamily='var(--font-mono)' fontSize='5.5' fill='var(--v16-accent)' textAnchor='end' letterSpacing='1'>SHEET A1</text>
-      <text x='30' y='28' fontFamily='var(--font-mono)' fontSize='5.5' fill='var(--v16-ink-dim)' letterSpacing='1'>SCALE 1:1</text>
+      <text x='50' y='28' fontFamily='var(--font-mono)' fontSize='7.5' fill='var(--v16-ink-label-strong)' letterSpacing='2'>SCALE 1:1</text>
+      <text x='500' y='28' fontFamily='var(--font-mono)' fontSize='7.5' fill='var(--v16-ink-label-strong)' textAnchor='middle' letterSpacing='2'>DWG·STACK-01 &nbsp; EXPLODED VIEW</text>
+      <text x='950' y='28' fontFamily='var(--font-mono)' fontSize='7.5' fill='var(--v16-accent)' textAnchor='end' letterSpacing='1'>SHEET A1</text>
 
-      {/* Left ruler ticks */}
-      <g stroke='var(--v16-ink-frame)' strokeWidth='0.5'>
-        {Array.from({ length: Math.floor((svgH - 60) / 18) }).map((_, i) => {
-          const ty = 42 + i * 18
-          return <line key={`lt${i}`} x1='18' y1={ty} x2={i % 3 === 0 ? '28' : '24'} y2={ty} />
-        })}
-      </g>
+      {/* Layers — angled exploded isometric */}
+      {layers.map((layer, i) => {
+        // Draw 3D box: front face, top face, right side
+        const x1 = layer.x
+        const y1 = layer.y
+        const w = layer.w
+        const h = layer.h
 
-      {/* Left dimension bracket */}
-      <g stroke='var(--v16-ink-hair)' strokeWidth='0.8'>
-        <line x1='36' y1={startY} x2='36' y2={startY + 6 * gap + slabH + skewY} />
-        <line x1='32' y1={startY} x2='40' y2={startY} />
-        <line x1='32' y1={startY + 6 * gap + slabH + skewY} x2='40' y2={startY + 6 * gap + slabH + skewY} />
-      </g>
-      <text x='24' y={startY + 3 * gap} fontFamily='var(--font-mono)' fontSize='6.5' letterSpacing='1.5' fill='#F07B2F' transform={`rotate(-90 24 ${startY + 3 * gap})`} textAnchor='middle'>7 LAYERS</text>
-
-      {/* Layers — stacked top to bottom */}
-      {stackRows.map((row, i) => {
-        const y = startY + i * gap
-        const x1 = cx - slabW / 2
-        const x2 = cx + slabW / 2
-        const isHighlight = i === 3 || i === 6
+        // Points for isometric projection - matching reference image
+        const topSkewX = 50
+        const topSkewY = 25
+        const sideSkewX = 50
+        const sideSkewY = 25
 
         return (
-          <g key={row.idx} className='v16-stack-layer' style={{ '--layer-index': i } as React.CSSProperties}>
-            {/* Isometric slab — top face (tilted) */}
+          <g key={i} className='v16-stack-layer' style={{ '--layer-index': i } as React.CSSProperties}>
+            {/* Top face */}
             <polygon
-              points={`${x1},${y + skewY} ${x1 + skew},${y} ${x2 + skew},${y} ${x2},${y + skewY}`}
-              fill={isHighlight ? 'url(#v16-ex-hatch)' : 'var(--v16-ink-layer-fill)'}
-              stroke='var(--v16-ink-corner)' strokeWidth='1'
+              points={`${x1},${y1} ${x1 + topSkewX},${y1 - topSkewY} ${x1 + w + topSkewX},${y1 - topSkewY} ${x1 + w},${y1}`}
+              fill='var(--v16-ink-layer-fill)'
+              stroke='var(--v16-ink-corner)'
+              strokeWidth='1.2'
             />
+
             {/* Front face */}
-            <rect x={x1} y={y + skewY} width={slabW} height={slabH} fill='var(--v16-ink-layer-fill)' stroke='var(--v16-ink-corner)' strokeWidth='1' />
-            {/* Right face */}
-            <polygon
-              points={`${x2},${y + skewY} ${x2 + skew},${y} ${x2 + skew},${y + slabH} ${x2},${y + skewY + slabH}`}
-              fill='var(--v16-ink-layer-right)' stroke='var(--v16-ink-corner)' strokeWidth='1'
+            <rect
+              x={x1}
+              y={y1}
+              width={w}
+              height={h}
+              fill='var(--v16-ink-layer-fill)'
+              stroke='var(--v16-ink-corner)'
+              strokeWidth='1.2'
             />
 
-            {/* Layer label on front face */}
-            <text x={cx} y={y + skewY + slabH / 2 + 4} fontFamily='var(--font-sans)' fontSize='10' fontWeight='700' fill='#ffffff' textAnchor='middle' letterSpacing='1.5'>{row.layer.toUpperCase()}</text>
+            {/* Right side */}
+            <polygon
+              points={`${x1 + w},${y1} ${x1 + w + sideSkewX},${y1 - sideSkewY} ${x1 + w + sideSkewX},${y1 + h - sideSkewY} ${x1 + w},${y1 + h}`}
+              fill='var(--v16-ink-layer-right)'
+              stroke='var(--v16-ink-corner)'
+              strokeWidth='1.2'
+            />
 
-            {/* Layer code on right face */}
-            <text x={x2 + skew / 2 + 4} y={y + slabH / 2 + 4} fontFamily='var(--font-mono)' fontSize='6' fill='var(--v16-ink-label)' textAnchor='middle' letterSpacing='0.5'>{row.idx}</text>
+            {/* Layer label */}
+            <text x={x1 + w / 2} y={y1 + h / 2 + 5} fontFamily='var(--font-sans)' fontSize='12' fontWeight='700' fill='#ffffff' textAnchor='middle' letterSpacing='2'>{layer.label}</text>
 
-            {/* Left callout — Product 1 */}
-            <line x1={x1} y1={y + skewY + slabH / 2} x2={x1 - 24} y2={y + skewY + slabH / 2} stroke='var(--v16-ink-callout)' strokeWidth='0.8' strokeDasharray='2 2' className='v16-stack-connector' />
-            <circle cx={x1} cy={y + skewY + slabH / 2} r='1.8' fill='#F07B2F' className='v16-stack-dot' />
-            <text x={x1 - 30} y={y + skewY + slabH / 2 - 3} fontFamily='var(--font-sans)' fontSize='9' fontWeight='700' fill='#F07B2F' textAnchor='end'>{row.products[0].name}</text>
-            <text x={x1 - 30} y={y + skewY + slabH / 2 + 11} fontFamily='var(--font-sans)' fontSize='6.5' fill='var(--v16-ink-label-strong)' textAnchor='end'>{row.products[0].desc}</text>
+            {/* Product callouts with right-angled lines */}
+            {layer.products.map((prod, pIdx) => {
+              const isLeft = prod.side === 'left'
 
-            {/* Right callout — Product 2 */}
-            {row.products[1] && (
+              // Dot position at middle of box edge
+              const dotX = isLeft ? x1 : x1 + w + sideSkewX
+              const dotY = y1 + h / 2 - sideSkewY / 2
+
+              // For multiple products, stack them vertically
+              const productOffset = (layer.products.length > 1) ? (pIdx - 0.5) * 30 : 0
+              const textY = dotY + productOffset
+
+              // Right-angled line: horizontal then vertical
+              const horizontalLength = 60
+              const cornerX = isLeft ? dotX - horizontalLength : dotX + horizontalLength
+              const lineEndX = isLeft ? x1 - 80 : x1 + w + sideSkewX + 80
+
+              // Text positioned at end
+              const textX = isLeft ? x1 - 85 : x1 + w + sideSkewX + 85
+              const textAnchor = isLeft ? 'end' : 'start'
+
+              return (
+                <g key={pIdx}>
+                  {/* Horizontal segment from box */}
+                  <line x1={dotX} y1={dotY} x2={cornerX} y2={dotY} stroke='var(--v16-ink-callout)' strokeWidth='0.8' strokeDasharray='3 2' className='v16-stack-connector' />
+                  {/* Vertical segment to text level */}
+                  <line x1={cornerX} y1={dotY} x2={cornerX} y2={textY} stroke='var(--v16-ink-callout)' strokeWidth='0.8' strokeDasharray='3 2' className='v16-stack-connector' />
+                  {/* Horizontal segment to text */}
+                  <line x1={cornerX} y1={textY} x2={lineEndX} y2={textY} stroke='var(--v16-ink-callout)' strokeWidth='0.8' strokeDasharray='3 2' className='v16-stack-connector' />
+                  <circle cx={dotX} cy={dotY} r='2.5' fill='#F07B2F' className='v16-stack-dot' />
+                  <text x={textX} y={textY - 5} fontFamily='var(--font-sans)' fontSize='11' fontWeight='700' fill='#F07B2F' textAnchor={textAnchor}>{prod.name}</text>
+                  {Array.isArray(prod.desc) ? (
+                    <>
+                      <text x={textX} y={textY + 10} fontFamily='var(--font-sans)' fontSize='7.5' fill='var(--v16-ink-label-strong)' textAnchor={textAnchor}>{prod.desc[0]}</text>
+                      <text x={textX} y={textY + 20} fontFamily='var(--font-sans)' fontSize='7.5' fill='var(--v16-ink-label-strong)' textAnchor={textAnchor}>{prod.desc[1]}</text>
+                    </>
+                  ) : (
+                    <text x={textX} y={textY + 10} fontFamily='var(--font-sans)' fontSize='7.5' fill='var(--v16-ink-label-strong)' textAnchor={textAnchor}>{prod.desc}</text>
+                  )}
+                </g>
+              )
+            })}
+
+            {/* Connecting dots between layers */}
+            {i < layers.length - 1 && (
               <>
-                <line x1={x2 + skew} y1={y + slabH / 2} x2={x2 + skew + 24} y2={y + slabH / 2} stroke='var(--v16-ink-callout)' strokeWidth='0.8' strokeDasharray='2 2' className='v16-stack-connector' />
-                <circle cx={x2 + skew} cy={y + slabH / 2} r='1.8' fill='#F07B2F' className='v16-stack-dot' />
-                <text x={x2 + skew + 30} y={y + slabH / 2 - 3} fontFamily='var(--font-sans)' fontSize='9' fontWeight='700' fill='#F07B2F'>{row.products[1].name}</text>
-                <text x={x2 + skew + 30} y={y + slabH / 2 + 11} fontFamily='var(--font-sans)' fontSize='6.5' fill='var(--v16-ink-label-strong)'>{row.products[1].desc}</text>
-              </>
-            )}
-
-            {/* Inter-layer flow blobs */}
-            {i < stackRows.length - 1 && (
-              <>
-                <circle cx={cx - 30} cy={y + skewY + slabH + (gap - slabH) / 2} r='2' fill='#F07B2F' className='v16-stack-blob' style={{ '--blob-delay': `${i * 0.7}s` } as React.CSSProperties} filter='url(#v16-ex-glow)' />
-                <circle cx={cx + 40} cy={y + skewY + slabH + (gap - slabH) / 2 + 3} r='1.2' fill='var(--v16-ink-corner)' className='v16-stack-blob' style={{ '--blob-delay': `${i * 0.7 + 0.35}s` } as React.CSSProperties} />
+                <circle cx={x1 + w / 2 - 20} cy={y1 + h + 10} r='2' fill='#F07B2F' className='v16-stack-blob' style={{ '--blob-delay': `${i * 0.7}s` } as React.CSSProperties} filter='url(#v16-ex-glow)' />
+                <circle cx={x1 + w / 2 + 30} cy={y1 + h + 15} r='1.5' fill='#F07B2F' className='v16-stack-blob' style={{ '--blob-delay': `${i * 0.7 + 0.35}s` } as React.CSSProperties} filter='url(#v16-ex-glow)' />
               </>
             )}
           </g>
         )
       })}
 
-      {/* Bottom measurement */}
-      <g stroke='var(--v16-ink-measure)' strokeWidth='0.6'>
-        <line x1={cx - slabW / 2} y1={svgH - 28} x2={cx + slabW / 2 + skew} y2={svgH - 28} />
-        <line x1={cx - slabW / 2} y1={svgH - 32} x2={cx - slabW / 2} y2={svgH - 24} />
-        <line x1={cx + slabW / 2 + skew} y1={svgH - 32} x2={cx + slabW / 2 + skew} y2={svgH - 24} />
-      </g>
-      <text x='450' y={svgH - 14} fontFamily='var(--font-mono)' fontSize='6.5' fill='var(--v16-ink-dim)' textAnchor='middle' letterSpacing='1.5'>FULL STACK · NO CAPABILITY GAPS · NO VENDOR LOCK-IN</text>
+      {/* Bottom annotation */}
+      <text x='500' y='680' fontFamily='var(--font-mono)' fontSize='7.5' fill='var(--v16-ink-dim)' textAnchor='middle' letterSpacing='2'>FULL STACK · NO CAPABILITY GAPS · NO VENDOR LOCK-IN</text>
     </svg>
   )
 }
