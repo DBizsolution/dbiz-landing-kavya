@@ -400,8 +400,8 @@ export default function V14Page() {
         </div>
       </section>
 
-      {/* WHY — V4 grid + V5 diagram */}
-      <section className='v14-section' id='about'>
+      {/* WHY — light surface */}
+      <section className='v14-section' id='about' data-surface='light'>
         <div className='v14-container'>
           <div className='v14-section-head v14-with-diagram'>
             <div>
