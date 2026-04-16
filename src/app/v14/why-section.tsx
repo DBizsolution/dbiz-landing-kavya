@@ -44,21 +44,21 @@ function WhyDiagram({ active, onSelect }: { active: number; onSelect: (i: number
         <clipPath id='v14-why-clip'><rect x='10' y='10' width='420' height='420' rx='4' /></clipPath>
       </defs>
 
-      {/* Frame border */}
-      <rect x='10' y='10' width='420' height='420' fill='none' stroke='#0D1B3E' strokeWidth='1.5' rx='4' />
+      {/* Frame border — subtle */}
+      <rect x='10' y='10' width='420' height='420' fill='none' stroke='rgba(13,27,62,0.12)' strokeWidth='1' rx='4' />
       {/* Corner brackets */}
-      <g stroke='#E86A2A' strokeWidth='2'>
-        <line x1='10' y1='10' x2='30' y2='10' /><line x1='10' y1='10' x2='10' y2='30' />
-        <line x1='430' y1='10' x2='410' y2='10' /><line x1='430' y1='10' x2='430' y2='30' />
-        <line x1='10' y1='430' x2='30' y2='430' /><line x1='10' y1='430' x2='10' y2='410' />
-        <line x1='430' y1='430' x2='410' y2='430' /><line x1='430' y1='430' x2='430' y2='410' />
+      <g stroke='#E86A2A' strokeWidth='1.5'>
+        <line x1='10' y1='10' x2='26' y2='10' /><line x1='10' y1='10' x2='10' y2='26' />
+        <line x1='430' y1='10' x2='414' y2='10' /><line x1='430' y1='10' x2='430' y2='26' />
+        <line x1='10' y1='430' x2='26' y2='430' /><line x1='10' y1='430' x2='10' y2='414' />
+        <line x1='430' y1='430' x2='414' y2='430' /><line x1='430' y1='430' x2='430' y2='414' />
       </g>
 
       <g clipPath='url(#v14-why-clip)'>
         {/* Subtle grid dots */}
         {Array.from({ length: 20 }).map((_, row) =>
           Array.from({ length: 20 }).map((_, col) => (
-            <circle key={`d${row}-${col}`} cx={22 + col * 21} cy={22 + row * 21} r='0.6' fill='rgba(13,27,62,0.08)' />
+            <circle key={`d${row}-${col}`} cx={22 + col * 21} cy={22 + row * 21} r='0.5' fill='rgba(13,27,62,0.04)' />
           ))
         )}
 
@@ -110,9 +110,10 @@ function WhyDiagram({ active, onSelect }: { active: number; onSelect: (i: number
           )
         })}
 
-        {/* Center hub */}
-        <circle cx={cx} cy={cy} r={hubR} fill='#0D1B3E' stroke='#E86A2A' strokeWidth='2.5' />
-        <circle cx={cx} cy={cy} r='20' fill='#E86A2A' filter='url(#v14-why-glow)' className='v14-why-hub-pulse' />
+        {/* Center hub — orange core */}
+        <circle cx={cx} cy={cy} r={hubR} fill='#E86A2A' stroke='rgba(232,106,42,0.4)' strokeWidth='3' />
+        <circle cx={cx} cy={cy} r={hubR + 8} fill='none' stroke='rgba(232,106,42,0.15)' strokeWidth='1' strokeDasharray='3 3' className='v14-why-active-ring' />
+        <circle cx={cx} cy={cy} r='20' fill='#D45A1A' className='v14-why-hub-pulse' />
         <text x={cx} y={cy - 4} fontFamily='var(--font-mono)' fontSize='7' fontWeight='700' fill='#fff' textAnchor='middle' letterSpacing='1'>WHY</text>
         <text x={cx} y={cy + 8} fontFamily='var(--font-sans)' fontSize='10' fontWeight='800' fill='#fff' textAnchor='middle' letterSpacing='1'>DBIZ</text>
       </g>
