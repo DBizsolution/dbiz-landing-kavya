@@ -17,7 +17,7 @@ const cases: CaseStudy[] = [
     title: 'Credit decisioning in hours, not weeks',
     kicker: 'Financial Services',
     body: 'Agent-driven risk models cut the underwriting cycle time for a tier-1 lender across retail, SME, and corporate books.',
-    image: 'linear-gradient(135deg, #0D1B3E 0%, #1A2D5A 40%, #E86A2A 100%)',
+    image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=500&fit=crop&q=80',
     tag: 'industry',
   },
   {
@@ -25,7 +25,7 @@ const cases: CaseStudy[] = [
     title: 'Dispatch, rewritten nightly',
     kicker: 'Logistics & Fleet',
     body: 'A national fleet operator replaced static route planning with agentic scheduling across 12,000 vehicles.',
-    image: 'linear-gradient(135deg, #1A2D5A 0%, #0D1B3E 50%, #D45A1A 100%)',
+    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=500&fit=crop&q=80',
     tag: 'industry',
   },
   {
@@ -33,7 +33,7 @@ const cases: CaseStudy[] = [
     title: 'Clinical documentation, automated',
     kicker: 'Aged Care',
     body: 'Care teams reclaimed hours per shift with voice-to-record agents compliant with regional reporting standards.',
-    image: 'linear-gradient(135deg, #070F22 0%, #1A2D5A 60%, #E86A2A 100%)',
+    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=500&fit=crop&q=80',
     tag: 'industry',
   },
   {
@@ -41,7 +41,7 @@ const cases: CaseStudy[] = [
     title: 'Industry-ready data cloud',
     kicker: 'FactWeavers™',
     body: 'Pre-modelled data products shipped without a six-month clean-up phase.',
-    image: 'linear-gradient(160deg, #0D1B3E 0%, #E86A2A 30%, #1A2D5A 100%)',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=500&fit=crop&q=80',
     tag: 'solution',
   },
   {
@@ -49,7 +49,7 @@ const cases: CaseStudy[] = [
     title: 'Multi-agent orchestration at scale',
     kicker: 'Agent Studio',
     body: 'Cross-system agents running order-to-cash for a Fortune 500 manufacturer.',
-    image: 'linear-gradient(160deg, #1A2D5A 0%, #D45A1A 40%, #070F22 100%)',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=500&fit=crop&q=80',
     tag: 'solution',
   },
   {
@@ -57,7 +57,7 @@ const cases: CaseStudy[] = [
     title: 'Concept to working build',
     kicker: 'DBiz Canvas',
     body: 'Product teams move from brief to production code inside a single sprint.',
-    image: 'linear-gradient(160deg, #070F22 0%, #E86A2A 50%, #0D1B3E 100%)',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=500&fit=crop&q=80',
     tag: 'solution',
   },
 ]
@@ -128,11 +128,11 @@ export default function ProvenSection() {
                 onClick={() => setActiveIdx(i)}
               >
                 {/* Image area */}
-                <div className='v14-proven-img' style={{ background: c.image }}>
+                <div className='v14-proven-img'>
+                  <img src={c.image} alt={c.kicker} loading='lazy' />
                   <div className='v14-proven-img-overlay'>
                     <span className='v14-proven-metric'>{c.metric}</span>
                   </div>
-                  {/* Blueprint grid dots on image */}
                   <div className='v14-proven-img-dots' />
                 </div>
                 {/* Content */}

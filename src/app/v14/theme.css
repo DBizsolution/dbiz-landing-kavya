@@ -1317,6 +1317,16 @@
   height: 200px;
   overflow: hidden;
 }
+.v14-proven-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.v14-proven-card:hover .v14-proven-img img {
+  transform: scale(1.06);
+}
 .v14-proven-img-dots {
   position: absolute;
   inset: 0;
@@ -1383,11 +1393,7 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Image hover zoom */
-.v14-proven-card:hover .v14-proven-img {
-  transform: scale(1.02);
-  transition: transform 0.4s ease;
-}
+/* Image hover — zoom handled on img element above */
 
 /* Navigation */
 .v14-proven-nav {
