@@ -373,11 +373,11 @@ export default function V14Page() {
 
       {/* STACK is now inside the Capabilities toggle */}
 
-      {/* PROVEN — tabbed filter cards */}
-      <ProvenSection />
-
       {/* TESTIMONIALS — carousel */}
       <TestimonialsSection />
+
+      {/* PROVEN — tabbed filter cards */}
+      <ProvenSection />
 
       {/* WHY — interactive diagram */}
       <WhySection />
