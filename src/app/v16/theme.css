@@ -488,10 +488,9 @@
 .v16-cta-primary .arrow { margin-left: auto; font-weight: 400; }
 
 .v16-cta-secondary {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
+  gap: 14px;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 700;
@@ -533,12 +532,13 @@
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--v16-ink-2);
-  border-bottom: 1px solid var(--v16-hair-strong);
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   padding-bottom: 4px;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 .v16-cta-text:hover { color: var(--v16-accent); border-color: var(--v16-accent); }
+
 
 /* ---------- LOGO CAROUSEL (from v9) ---------- */
 .v16-logos-wrap {
@@ -699,6 +699,12 @@
 .v16-stats {
   padding: var(--v16-rhythm) 0;
   border-bottom: 1px solid var(--v16-hair);
+  background-color: #F0EEEB !important;
+  background-image:
+    radial-gradient(rgba(20, 18, 16, 0.025) 1px, transparent 1px),
+    radial-gradient(rgba(20, 18, 16, 0.018) 1px, transparent 1px) !important;
+  background-size: 3px 3px, 7px 7px !important;
+  background-position: 0 0, 1px 2px !important;
 }
 .v16-stats-grid {
   display: grid;
@@ -963,6 +969,7 @@
   flex-direction: column;
   gap: 20px;
   flex: 1;
+  align-items: flex-start;
 }
 .v16-cap-detail-icon {
   display: flex;

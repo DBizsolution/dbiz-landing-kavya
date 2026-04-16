@@ -1,8 +1,11 @@
-/* V16 — Swiss Blueprint
+/* V14 — Swiss Blueprint
    V4's 12-column grid structure on V5's dark blueprint canvas.
    Capabilities as interactive tabs, SVG diagrams (V5). */
 
 import CapabilitiesSection from './capabilities-section'
+import HowSection from './how-section'
+import { LogoWall } from './logo-wall'
+import { NavScrollEffect } from './nav-scroll'
 import ProvenSection from './proven-section'
 import TestimonialsSection from './testimonials-section'
 import WhySection from './why-section'
@@ -28,6 +31,10 @@ function HeroDiagram() {
     { label: 'AGENTS', code: 'S·06' },
     { label: 'OPS', code: 'S·07' },
   ]
+
+  // 5 particles with varied spacing to break rhythm
+  const particlePositions = [175, 215, 245, 280, 310]
+
   return (
     <svg viewBox='0 0 520 560' xmlns='http://www.w3.org/2000/svg' aria-hidden='true' className='v16-hero-svg'>
       <defs>
@@ -57,24 +64,63 @@ function HeroDiagram() {
         ))}
       </g>
       <rect x='60' y='60' width='400' height='440' fill='url(#v16-dot)' />
+
+      {/* Particles flowing between layers */}
+      {layers.map((layer, i) => {
+        if (i === layers.length - 1) return null
+        const fromY = 90 + i * 56 + 32
+        const particleDelay = i * 1.5
+
+        return (
+          <g key={`particles-${i}`}>
+            {particlePositions.map((x, pIdx) => (
+              <circle
+                key={`${i}-${pIdx}`}
+                cx={x}
+                cy={fromY}
+                r='2'
+                fill='#F07B2F'
+                className='v16-particle'
+                style={{ '--particle-delay': `${particleDelay + pIdx * 0.2 + (pIdx % 2) * 0.1}s` } as React.CSSProperties}
+                filter='url(#v16-glow)'
+              />
+            ))}
+          </g>
+        )
+      })}
+
       {layers.map((layer, i) => {
         const y = 90 + i * 56
         const skew = 26
         return (
-          <g key={layer.code} className='v16-layer' style={{ '--layer-index': i } as React.CSSProperties}>
-            <polygon points={`${140},${y} ${360},${y} ${360 + skew},${y - 14} ${140 + skew},${y - 14}`} fill='none' stroke='var(--v16-ink-corner)' strokeWidth='1' />
-            <rect x='140' y={y} width='220' height='32' fill={i === 3 ? 'url(#v16-hatch)' : 'var(--v16-ink-layer-fill)'} stroke='var(--v16-ink-corner)' strokeWidth='1' />
-            <polygon points={`${360},${y} ${360 + skew},${y - 14} ${360 + skew},${y + 18} ${360},${y + 32}`} fill='var(--v16-ink-layer-right)' stroke='var(--v16-ink-corner)' strokeWidth='1' />
+          <g key={layer.code} className='v16-layer' style={{ '--layer-index': i, '--box-index': i } as React.CSSProperties}>
+            {/* Top face */}
+            <polygon points={`${140},${y} ${360},${y} ${360 + skew},${y - 14} ${140 + skew},${y - 14}`} fill='var(--v16-ink-layer-fill)' stroke='var(--v16-ink-corner)' strokeWidth='1' />
+            {/* Front face - solid opaque background first */}
+            <rect x='140' y={y} width='220' height='32' fill='var(--v16-ink-layer-fill)' />
+            {/* Front face - pattern or fill on top */}
+            <rect
+              x='140'
+              y={y}
+              width='220'
+              height='32'
+              fill={i === 3 ? 'url(#v16-hatch)' : 'none'}
+              stroke='var(--v16-ink-corner)'
+              strokeWidth='1'
+              className='v16-box-border v16-box-fill'
+            />
+            {/* Right side face */}
+            <polygon
+              points={`${360},${y} ${360 + skew},${y - 14} ${360 + skew},${y + 18} ${360},${y + 32}`}
+              fill='var(--v16-ink-layer-right)'
+              stroke='var(--v16-ink-corner)'
+              strokeWidth='1'
+              className='v16-box-border v16-box-side'
+            />
             <text x='156' y={y + 20} fontFamily='var(--font-mono)' fontSize='10' letterSpacing='1.5' fill='#ffffff'>{layer.label}</text>
             <line x1={360 + skew} y1={y + 8} x2='450' y2={y + 8} stroke='var(--v16-ink-callout)' strokeWidth='0.8' strokeDasharray='2 2' className='v16-callout-line' />
             <circle cx={360 + skew} cy={y + 8} r='1.6' fill='#F07B2F' className='v16-callout-dot' />
             <text x='454' y={y + 11} fontFamily='var(--font-mono)' fontSize='8.5' letterSpacing='1' fill='#F07B2F'>{layer.code}</text>
-            {i < layers.length - 1 && (
-              <>
-                <circle cx='250' cy={y + 38} r='2.5' fill='#F07B2F' className='v16-comm-blob' style={{ '--blob-delay': `${i * 0.8}s` } as React.CSSProperties} filter='url(#v16-glow)' />
-                <circle cx='200' cy={y + 42} r='1.8' fill='var(--v16-ink-corner)' className='v16-comm-blob' style={{ '--blob-delay': `${i * 0.8 + 0.4}s` } as React.CSSProperties} />
-              </>
-            )}
           </g>
         )
       })}
@@ -270,6 +316,7 @@ function ProcessDiagram() {
 export default function V14Page() {
   return (
     <>
+      <NavScrollEffect />
       {/* NAV — V4 grid structure, V5 dark treatment */}
       <nav className='v16-nav'>
         <div className='v16-nav-inner'>
@@ -329,24 +376,8 @@ export default function V14Page() {
         </div>
       </section>
 
-      {/* TRUST — animated marquee */}
-      <section className='v16-trust'>
-        <div className='v16-trust-inner'>
-          <div className='v16-trust-label'>Trusted by 50+ enterprises across 6 countries</div>
-          <div className='v16-marquee-wrap'>
-            <div className='v16-marquee-track'>
-              {[...trust, ...trust].map((name, i) => (
-                <span key={i} className='v16-trust-logo'>{name}</span>
-              ))}
-            </div>
-            <div className='v16-marquee-track' aria-hidden='true'>
-              {[...trust, ...trust].map((name, i) => (
-                <span key={i} className='v16-trust-logo'>{name}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* TRUST — logo carousel from v9 */}
+      <LogoWall />
 
       {/* STATS — light surface */}
       <section className='v16-stats' data-surface='light'>
@@ -368,33 +399,37 @@ export default function V14Page() {
         </div>
       </section>
 
+      {/* TESTIMONIALS — carousel */}
+      <TestimonialsSection />
+
       {/* CAPABILITIES — interactive tabbed layout */}
       <CapabilitiesSection />
 
       {/* STACK is now inside the Capabilities toggle */}
 
-      {/* TESTIMONIALS — carousel */}
-      <TestimonialsSection />
-
       {/* PROVEN — tabbed filter cards */}
       <ProvenSection />
+
+      {/* HOW WE WORK — time-boxed delivery phases */}
+      <HowSection />
 
       {/* WHY — interactive diagram */}
       <WhySection />
 
-      {/* FINAL CTA — V4 asymmetric grid, V5 dark */}
+      {/* FINAL CTA — Centered layout with grid background */}
       <section className='v16-cta' id='cta'>
-        <div className='v16-container'>
+        <div className='v16-cta-inner'>
           <span className='v16-corner tl' />
           <span className='v16-corner tr' />
           <span className='v16-corner bl' />
           <span className='v16-corner br' />
-          <div className='v16-cta-grid'>
-            <div className='v16-cta-num'>N°07 / Contact</div>
-            <div className='v16-cta-body'>
-              <h2>Your Frontier Organisation starts with a conversation.</h2>
-              <div className='sub'>One partner &nbsp;·&nbsp; Full stack &nbsp;·&nbsp; No handoff</div>
-            </div>
+          <div className='v16-cta-content'>
+            <div className='v16-cta-label'>[Z·01] NEXT STEP</div>
+            <h2>
+              Your Frontier Organisation<br />
+              starts with a <span style={{ color: 'var(--v16-accent)' }}>conversation.</span>
+            </h2>
+            <div className='v16-cta-sub'>One partner · Full stack · No handoff</div>
             <div className='v16-cta-actions'>
               <a href='#' className='v16-cta-primary'>Contact us <span className='arrow'>→</span></a>
               <a href='#' className='v16-cta-text'>Or get an architecture assessment</a>
