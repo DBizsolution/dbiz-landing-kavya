@@ -43,13 +43,14 @@ function WhyDiagram({ active, onSelect }: { active: number; onSelect: (i: number
           <line x1='8' y1='0' x2='0' y2='8' stroke='rgba(13,27,62,0.06)' strokeWidth='0.4' />
         </pattern>
         <pattern id='v14-why-grid' patternUnits='userSpaceOnUse' width='20' height='20'>
-          <path d='M 20 0 L 0 0 0 20' fill='none' stroke='rgba(13,27,62,0.05)' strokeWidth='0.5' />
+          <path d='M 20 0 L 0 0 0 20' fill='none' stroke='rgba(13,27,62,0.07)' strokeWidth='0.5' />
         </pattern>
         <clipPath id='v14-why-clip'><rect x='12' y='12' width='416' height='416' /></clipPath>
       </defs>
 
-      {/* Frame */}
-      <rect x='10' y='10' width='420' height='420' fill='url(#v14-why-grid)' stroke='rgba(13,27,62,0.15)' strokeWidth='1' />
+      {/* Frame — subtle navy tint */}
+      <rect x='10' y='10' width='420' height='420' fill='rgba(13,27,62,0.03)' stroke='rgba(13,27,62,0.12)' strokeWidth='1' />
+      <rect x='10' y='10' width='420' height='420' fill='url(#v14-why-grid)' />
       {/* Corner brackets */}
       <g stroke='#F07B2F' strokeWidth='1.5'>
         <line x1='10' y1='10' x2='28' y2='10' /><line x1='10' y1='10' x2='10' y2='28' />
