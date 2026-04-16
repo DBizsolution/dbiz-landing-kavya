@@ -321,7 +321,7 @@ export default function V14Page() {
       <nav className='v16-nav'>
         <div className='v16-nav-inner'>
           <div className='v16-logo'>
-            dbiz<span className='dot'>.</span><span className='suffix'>ai</span>
+            <img src='/dbiz-logo.svg' alt='DBiz.ai' width='80' height='45' />
           </div>
           <ul className='v16-nav-links'>
             <li><a href='#solutions'>Our Solutions</a></li>
@@ -443,7 +443,9 @@ export default function V14Page() {
         <div className='v16-container'>
           <div className='v16-foot-top'>
             <div className='v16-foot-brand'>
-              <div className='v16-logo'>dbiz<span className='dot'>.</span><span className='suffix'>ai</span></div>
+              <div className='v16-logo'>
+                <img src='/dbiz-logo.svg' alt='DBiz.ai' width='80' height='45' />
+              </div>
               <div className='tag'>Human-Led &nbsp;|&nbsp; Agent-Operated &nbsp;|&nbsp; Data-Powered</div>
               <div className='meta'>10 offices · 6 countries · 800+ people</div>
             </div>
