@@ -332,6 +332,19 @@ export default function V14Page() {
           <div className='v17-nav-cta-wrap'>
             <a href='#cta' className='v17-nav-cta'>Get an assessment <span>→</span></a>
           </div>
+          <details className='v17-nav-mobile'>
+            <summary className='v17-nav-burger' aria-label='Menu'>
+              <span /><span /><span />
+            </summary>
+            <ul className='v17-nav-mobile-panel'>
+              <li><a href='#solutions'>Our Solutions</a></li>
+              <li><a href='#work'>Our Work</a></li>
+              <li><a href='#about'>About Us</a></li>
+              <li><a href='#careers'>Careers</a></li>
+              <li><a href='/contact'>Talk to our team</a></li>
+              <li><a href='#cta' className='v17-nav-mobile-cta'>Get an assessment →</a></li>
+            </ul>
+          </details>
         </div>
       </nav>
 
@@ -343,8 +356,12 @@ export default function V14Page() {
               <span className='num'>N°01 / Homepage</span>
             </div>
             <div className='v17-hero-eyebrow'>
-              <span className='bar' />
-              Human-Led &nbsp;|&nbsp; Agent-Operated &nbsp;|&nbsp; Data-Powered
+              <span className='bar' aria-hidden='true' />
+              <span>Human-Led</span>
+              <span className='sep' aria-hidden='true'>|</span>
+              <span>Agent-Operated</span>
+              <span className='sep' aria-hidden='true'>|</span>
+              <span>Data-Powered</span>
             </div>
             <div className='v17-hero-title'>
               <h1>
