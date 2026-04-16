@@ -392,7 +392,7 @@ export default function V14Page() {
         </div>
       </section>
 
-      {/* TRUST — logo carousel from v9 */}
+      {/* TRUST — client register */}
       <LogoWall />
 
       {/* STATS — light surface */}
@@ -415,13 +415,13 @@ export default function V14Page() {
         </div>
       </section>
 
-      {/* TESTIMONIALS — carousel */}
-      <TestimonialsSection />
-
       {/* CAPABILITIES — interactive tabbed layout */}
       <CapabilitiesSection />
 
       {/* STACK is now inside the Capabilities toggle */}
+
+      {/* TESTIMONIALS — carousel */}
+      <TestimonialsSection />
 
       {/* PROVEN — tabbed filter cards */}
       <ProvenSection />
