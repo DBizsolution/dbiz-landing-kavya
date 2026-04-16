@@ -1,129 +1,9 @@
 /* V14 — Swiss Blueprint
    V4's 12-column grid structure on V5's dark blueprint canvas.
-   Capabilities as tabular rows (V4), SVG diagrams (V5). */
+   Capabilities as interactive tabs, SVG diagrams (V5). */
 
-type Capability = {
-  num: string
-  kicker: string
-  title: string
-  tags: string
-  body: string
-}
+import CapabilitiesSection from './capabilities-section'
 
-const capabilities: Capability[] = [
-  {
-    num: '01',
-    kicker: 'Start here',
-    title: 'Strategy & Architecture',
-    tags: 'Futures Studio · TechOffice Foundry',
-    body: 'Your business priorities become an AI and technology roadmap. Use case prioritisation, readiness assessment, architecture blueprint, data governance and security posture.',
-  },
-  {
-    num: '02',
-    kicker: 'Cloud',
-    title: 'AI-Ready Infrastructure',
-    tags: 'Multi-hyperscaler · Purpose-built',
-    body: 'Cloud built for AI workloads, not retrofitted for them. Environments for agents, data pipelines, and AI models — with governance, cost controls, and observability enterprise IT requires.',
-  },
-  {
-    num: '03',
-    kicker: 'Data & AI',
-    title: 'The Intelligence Layer',
-    tags: 'FactWeavers™ · Domain Data Cloud',
-    body: "Every AI initiative stalls on the same thing: the data isn\u2019t ready. FactWeavers\u2122 cleans, unifies, and activates enterprise data — pre-modelled for your industry, ready for agents from day one.",
-  },
-  {
-    num: '04',
-    kicker: 'Business Apps & Integration',
-    title: 'Connected Systems, Not Silos',
-    tags: 'No rip and replace',
-    body: "CRM, ERP, and platform investments don\u2019t need replacing — they need unlocking. We connect existing systems so AI agents can read, write, and act across your entire application landscape.",
-  },
-  {
-    num: '05',
-    kicker: 'Product & Experience',
-    title: 'What People Actually Use',
-    tags: 'AI-native · Perpetual Engineering',
-    body: 'AI-native applications, digital twins, and next-gen experiences that evolve with the business. Designed for the new interaction patterns between humans and agents.',
-  },
-  {
-    num: '06',
-    kicker: 'Managed Services',
-    title: 'AI-First Operations',
-    tags: 'The team that built it runs it',
-    body: "AI-first monitoring, governance, and continuous improvement across your entire stack. Not a support contract from a team that\u2019s never seen the architecture.",
-  },
-  {
-    num: '07',
-    kicker: 'Governance',
-    title: 'Security & AI Risk',
-    tags: 'Built in, not bolted on',
-    body: 'Data sovereignty, AI governance frameworks, hallucination risk management, model drift monitoring, and compliance-ready architecture — embedded into every layer from day one.',
-  },
-]
-
-type StackRow = {
-  layer: string
-  idx: string
-  products: { name: string; desc: string }[]
-}
-
-const stackRows: StackRow[] = [
-  {
-    layer: 'Strategy',
-    idx: '01',
-    products: [
-      { name: 'Futures Studio', desc: 'AI ambition, roadmap and use case prioritisation aligned to measurable business values.' },
-    ],
-  },
-  {
-    layer: 'Architecture',
-    idx: '02',
-    products: [
-      { name: 'TechOffice Foundry', desc: 'AI architecture foundation, governance and standards, Well-Architected review with AI-pillars.' },
-    ],
-  },
-  {
-    layer: 'Cloud',
-    idx: '03',
-    products: [
-      { name: 'Multi-Cloud AI Foundation', desc: 'AWS · Azure · GCP. Deploy on the right cloud for each workload.' },
-      { name: 'DBiz Canvas', desc: 'Concept to code in days — not quarters.' },
-    ],
-  },
-  {
-    layer: 'Development',
-    idx: '04',
-    products: [
-      { name: 'Nexus Platform', desc: 'Enterprise AI development environment for agent-based software engineering.' },
-      { name: 'Perpetual Engineering', desc: 'AI agents working across the full software delivery lifecycle.' },
-    ],
-  },
-  {
-    layer: 'Productivity',
-    idx: '05',
-    products: [
-      { name: 'Claude Cowork & Copilot', desc: 'AI-automation for every role across the enterprise.' },
-      { name: 'AI-Infused BizApps', desc: 'Autonomous agents for business execution within SaaS platforms.' },
-    ],
-  },
-  {
-    layer: 'Orchestration',
-    idx: '06',
-    products: [
-      { name: 'Agent Studio', desc: 'Agentic AI and multi-agent orchestration at enterprise scale.' },
-      { name: 'Nexus iConnector', desc: 'MCP connectors via Boomi, MuleSoft, Workato — no rip and replace.' },
-    ],
-  },
-  {
-    layer: 'Data & Insights',
-    idx: '07',
-    products: [
-      { name: 'FactWeavers.ai', desc: 'Data democratisation and quick insights with a domain data cloud.' },
-      { name: 'DBiz Compass', desc: 'AI-infused data engineering across the enterprise estate.' },
-    ],
-  },
-]
 
 type Case = { metric: string; title: string; kicker: string; body: string }
 
@@ -156,14 +36,13 @@ const whyReasons = [
 ]
 
 const stats = [
-  { coord: '[A·01]', val: '10+', lbl: 'Years enterprise delivery' },
-  { coord: '[A·02]', val: '50+', lbl: 'Enterprise clients' },
-  { coord: '[A·03]', val: '150+', lbl: 'AI solutions in production' },
-  { coord: '[A·04]', val: '11', lbl: 'Industries' },
-  { coord: '[A·05]', val: '6', lbl: 'Countries' },
+  { coord: '[A·01]', val: '500+', lbl: 'Engineers' },
+  { coord: '[A·02]', val: '50+', lbl: 'Clients' },
+  { coord: '[A·03]', val: '120', lbl: 'Solutions delivered' },
+  { coord: '[A·04]', val: '6', lbl: 'Countries' },
 ]
 
-const trust = ['AWS', 'Azure', 'Salesforce', 'Snowflake', 'Databricks', 'Anthropic', 'Boomi', 'MuleSoft', 'Microsoft']
+const trust = ['ACFS Logistics', 'Aldar', 'Carlisle Homes', 'Custom Fleet', 'Southern Cross Care', 'Angle Auto', 'Smart Group', 'Nationwide Towing', 'Fleet Partners', 'Ventia']
 
 /* ─── SVG Diagrams (from V5) ─── */
 
@@ -478,26 +357,31 @@ export default function V14Page() {
         </div>
       </section>
 
-      {/* TRUST — V4 grid layout */}
+      {/* TRUST — animated marquee */}
       <section className='v14-trust'>
-        <div className='v14-container'>
-          <div className='v14-trust-grid'>
-            <div className='v14-trust-label'>Trusted by 50+ enterprises across 6 countries</div>
-            <div className='v14-trust-list'>
-              {trust.map((name, i) => (
-                <span key={name}>{name}{i < trust.length - 1 && <span className='sep'>·</span>}</span>
+        <div className='v14-trust-inner'>
+          <div className='v14-trust-label'>Trusted by 50+ enterprises across 6 countries</div>
+          <div className='v14-marquee-wrap'>
+            <div className='v14-marquee-track'>
+              {[...trust, ...trust].map((name, i) => (
+                <span key={i} className='v14-trust-logo'>{name}</span>
+              ))}
+            </div>
+            <div className='v14-marquee-track' aria-hidden='true'>
+              {[...trust, ...trust].map((name, i) => (
+                <span key={i} className='v14-trust-logo'>{name}</span>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* STATS — V5 boxed style */}
-      <section className='v14-stats'>
+      {/* STATS — light surface */}
+      <section className='v14-stats' data-surface='light'>
         <div className='v14-container'>
           <div className='v14-section-head'>
             <div className='num'>N°02 / By the numbers</div>
-            <h2>A decade of enterprise delivery.</h2>
+            <h2>A decade of enterprise <em>delivery.</em></h2>
             <p className='lead'>Not a pitch deck — measurable, deployed, running in production today.</p>
           </div>
           <div className='v14-stats-grid'>
@@ -512,66 +396,10 @@ export default function V14Page() {
         </div>
       </section>
 
-      {/* CAPABILITIES — V4 tabular rows (not V5 tabs) */}
-      <section className='v14-section' id='solutions'>
-        <div className='v14-container'>
-          <div className='v14-section-head'>
-            <div className='num'>N°03 / Capabilities</div>
-            <h2>The AI gap every enterprise hits.</h2>
-            <p className='lead'>We translate your priorities into an AI and technology roadmap. Then deliver against it — across every layer, with industry-leading partners at each step.</p>
-          </div>
-          <div className='v14-cap-list'>
-            {capabilities.map((cap) => (
-              <div key={cap.num} className='v14-cap-row'>
-                <div className='v14-cap-num'>{cap.num}</div>
-                <div className='v14-cap-kicker'>{cap.kicker}</div>
-                <div>
-                  <div className='v14-cap-title'>{cap.title}</div>
-                  <div className='v14-cap-tags'>{cap.tags}</div>
-                </div>
-                <div className='v14-cap-body'>{cap.body}</div>
-              </div>
-            ))}
-          </div>
-          <div className='v14-gap-badge'>
-            <span className='tri'>▲</span>
-            <span>The Frontier Organisation</span>
-          </div>
-        </div>
-      </section>
+      {/* CAPABILITIES — interactive tabbed layout */}
+      <CapabilitiesSection />
 
-      {/* STACK — V4 table + V5 corner brackets */}
-      <section className='v14-stack'>
-        <div className='v14-container'>
-          <div className='v14-section-head'>
-            <div className='num'>N°04 / The stack</div>
-            <h2>DBiz AI Transformation Stack.</h2>
-            <p className='lead'>No capability gaps. No vendor lock-in. A complete delivery stack — from strategy to orchestration.</p>
-          </div>
-          <div className='v14-stack-frame'>
-            <div className='v14-stack-label'>
-              <div className='l'>Layer</div>
-              <div className='r'>Products &amp; platforms</div>
-            </div>
-            {stackRows.map((row) => (
-              <div key={row.layer} className={`v14-stack-row ${row.products.length === 1 ? 'single' : ''}`}>
-                <div className='layer'>
-                  <span className='idx'>{row.idx}</span>
-                  {row.layer}
-                </div>
-                <div className='products'>
-                  {row.products.map((p) => (
-                    <div key={p.name}>
-                      <div className='prod-name'>{p.name}</div>
-                      <div className='prod-desc'>{p.desc}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* STACK is now inside the Capabilities toggle */}
 
       {/* PROVEN — V4 cards + V5 borders */}
       <section className='v14-section' id='work'>
@@ -636,8 +464,8 @@ export default function V14Page() {
         </div>
       </section>
 
-      {/* TESTIMONIAL — V5 framed quote */}
-      <section className='v14-quote-section'>
+      {/* TESTIMONIAL — light surface */}
+      <section className='v14-quote-section' data-surface='light'>
         <div className='v14-container'>
           <div className='v14-quote-frame'>
             <div className='v14-quote-meta'>
@@ -691,8 +519,8 @@ export default function V14Page() {
         </div>
       </section>
 
-      {/* WHY — V4 grid + V5 diagram */}
-      <section className='v14-section' id='about'>
+      {/* WHY — light surface, V4 grid + V5 diagram */}
+      <section className='v14-section' id='about' data-surface='light'>
         <div className='v14-container'>
           <div className='v14-section-head v14-with-diagram'>
             <div>

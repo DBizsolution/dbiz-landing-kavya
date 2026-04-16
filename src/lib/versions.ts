@@ -78,4 +78,10 @@ export const versions: Version[] = [
     tagline: 'Clone of V5 Blueprint — schematic navy paper with orange hairline annotations',
     status: 'draft',
   },
+  {
+    slug: 'v14',
+    name: 'V14 — Swiss Blueprint',
+    tagline: 'V4 grid precision on V5 dark blueprint canvas',
+    status: 'draft',
+  },
 ]
