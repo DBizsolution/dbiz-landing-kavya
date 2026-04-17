@@ -1459,13 +1459,6 @@
   position: relative;
   padding: 0;
   overflow: hidden;
-  /* Subtle faded grid — scoped to the illustration container only */
-  background-color: transparent;
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
-  background-size: 72px 72px, 72px 72px, 24px 24px;
 }
 .v20-stack-diagram-wrap::before,
 .v20-stack-diagram-wrap::after {
@@ -1537,9 +1530,9 @@
 }
 @keyframes v20-disc-halo-sweep {
   0%, 22%, 100% { opacity: 0; transform: scale(1); }
-  5% { opacity: 0.8; transform: scale(1.12); }
-  10% { opacity: 0.44; transform: scale(1.04); }
-  18% { opacity: 0.08; transform: scale(1); }
+  5% { opacity: 0.7; transform: scale(1.08); }
+  10% { opacity: 0.35; transform: scale(1.02); }
+  18% { opacity: 0.05; transform: scale(1); }
 }
 
 /* Responsive */
@@ -2661,23 +2654,19 @@
   animation-delay: var(--particle-delay);
 }
 
-/* Border flash — lights up top→bottom, 1 (sometimes 2) layer at a time */
+/* Light-up cascades slowly top→bottom, one layer at a time (12s full cycle) */
 .v20-hero-svg .v20-box-border {
   stroke: var(--v20-ink-corner);
-  animation: v20-border-flash 5s ease-in-out infinite;
-  animation-delay: calc(var(--box-index) * 1.3s);
+  animation: v20-border-flash 12s ease-in-out infinite;
+  animation-delay: calc(var(--box-index) * 1.7s);
 }
-
-/* Box fill light-up */
 .v20-hero-svg .v20-box-fill {
-  animation: v20-box-lightup 5s ease-in-out infinite;
-  animation-delay: calc(var(--box-index) * 1.3s);
+  animation: v20-box-lightup 12s ease-in-out infinite;
+  animation-delay: calc(var(--box-index) * 1.7s);
 }
-
-/* Side face light-up */
 .v20-hero-svg .v20-box-side {
-  animation: v20-side-lightup 5s ease-in-out infinite;
-  animation-delay: calc(var(--box-index) * 1.3s);
+  animation: v20-side-lightup 12s ease-in-out infinite;
+  animation-delay: calc(var(--box-index) * 1.7s);
 }
 
 @keyframes v20-layer-appear {

@@ -32,8 +32,8 @@ function HeroDiagram() {
     { label: 'OPS', code: 'S·07' },
   ]
 
-  // 5 particles with varied spacing to break rhythm
-  const particlePositions = [175, 215, 245, 280, 310]
+  // 5 particles centered across the box front-face (box spans 140→360, center 250)
+  const particlePositions = [200, 230, 250, 270, 300]
 
   return (
     <svg viewBox='0 0 520 560' xmlns='http://www.w3.org/2000/svg' aria-hidden='true' className='v20-hero-svg'>
@@ -78,7 +78,7 @@ function HeroDiagram() {
                 key={`${i}-${pIdx}`}
                 cx={x}
                 cy={fromY}
-                r='2'
+                r='2.6'
                 fill='#F07B2F'
                 className='v20-particle'
                 style={{ '--particle-delay': `${particleDelay + pIdx * 0.2 + (pIdx % 2) * 0.1}s` } as React.CSSProperties}

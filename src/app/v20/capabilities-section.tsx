@@ -176,15 +176,23 @@ function StackDiagram() {
             <circle cx={cx} cy={cy} r='3' fill={acc} />
           </g>
         )
-      case 4: // 05 Productivity — lightning bolt (speed / Claude co-work)
+      case 4: // 05 Productivity — dual-ring co-work (human + AI converging)
         return (
           <g>
-            <circle cx={cx} cy={cy} r='42' stroke={ink} strokeWidth='0.5' strokeDasharray='2 3' fill='none' />
-            <path d={`M ${cx + 6} ${cy - 32} L ${cx - 16} ${cy + 4} L ${cx - 2} ${cy + 4} L ${cx - 8} ${cy + 32} L ${cx + 16} ${cy - 4} L ${cx + 2} ${cy - 4} Z`}
-              stroke={acc} strokeWidth='1.5' strokeLinejoin='round' fill={acc} fillOpacity='0.14' />
-            <circle cx={cx + 6} cy={cy - 32} r='2.2' fill={acc} />
-            <circle cx={cx - 34} cy={cy} r='2' fill={acc} opacity='0.7' />
-            <circle cx={cx + 34} cy={cy} r='2' fill={acc} opacity='0.7' />
+            {/* Left ring — "human" (grey) */}
+            <circle cx={cx - 16} cy={cy} r='24' stroke={ink} strokeWidth='1.1' fill='none' />
+            <circle cx={cx - 16} cy={cy} r='16' stroke={ink} strokeWidth='0.6' strokeDasharray='2 2' fill='none' />
+            <circle cx={cx - 16} cy={cy} r='2' fill={ink} />
+            {/* Right ring — "AI" (orange) */}
+            <circle cx={cx + 16} cy={cy} r='24' stroke={acc} strokeWidth='1.3' fill='none' />
+            <circle cx={cx + 16} cy={cy} r='16' stroke={acc} strokeWidth='0.6' strokeDasharray='2 2' fill='none' />
+            <circle cx={cx + 16} cy={cy} r='2' fill={acc} />
+            {/* Convergence core — shared spark at the intersection */}
+            <circle cx={cx} cy={cy} r='7' fill={acc} fillOpacity='0.18' stroke={acc} strokeWidth='1.3' />
+            <circle cx={cx} cy={cy} r='2.5' fill={acc} />
+            {/* Subtle accent dots top & bottom of overlap */}
+            <circle cx={cx} cy={cy - 32} r='1.6' fill={acc} opacity='0.5' />
+            <circle cx={cx} cy={cy + 32} r='1.6' fill={acc} opacity='0.5' />
           </g>
         )
       case 5: // 06 Orchestration — hub with 6 connected nodes (no outer ring)
@@ -262,8 +270,11 @@ function StackDiagram() {
           <circle cx='1' cy='1' r='0.6' fill='var(--v20-ink-dot)' />
         </pattern>
         <pattern id='v20-disc-grid' patternUnits='userSpaceOnUse' width='14' height='14'>
-          <path d='M 14 0 L 0 0 0 14' fill='none' stroke='rgba(255,255,255,0.06)' strokeWidth='0.4' />
+          <path d='M 14 0 L 0 0 0 14' fill='none' stroke='rgba(255,255,255,0.14)' strokeWidth='0.6' />
         </pattern>
+        <filter id='v20-halo-blur' x='-30%' y='-30%' width='160%' height='160%'>
+          <feGaussianBlur stdDeviation='14' />
+        </filter>
         <radialGradient id='v20-disc-halo'>
           <stop offset='0%' stopColor='var(--v20-accent)' stopOpacity='0.85' />
           <stop offset='35%' stopColor='var(--v20-accent)' stopOpacity='0.45' />
@@ -305,7 +316,7 @@ function StackDiagram() {
         return (
           <g key={layer.n} className='v20-stack-layer' style={{ '--layer-index': i } as React.CSSProperties}>
             {/* Traveling halo — staggered via CSS delay, sweeps across all discs */}
-            <circle cx={cx} cy={shaftY} r={discR + 28} fill='url(#v20-disc-halo)' className='v20-disc-halo' style={{ animationDelay: `${i * 1.4}s` } as React.CSSProperties} />
+            <rect x={cx - discR - 14} y={shaftY - discR - 14} width={(discR + 14) * 2} height={(discR + 14) * 2} fill='var(--v20-accent)' fillOpacity='0.35' filter='url(#v20-halo-blur)' className='v20-disc-halo' style={{ animationDelay: `${i * 1.4}s` } as React.CSSProperties} />
 
             {/* Outer housing — dashed square (grey) */}
             <rect x={cx - discR} y={shaftY - discR} width={discR * 2} height={discR * 2} stroke='rgba(255,255,255,0.22)' strokeWidth='0.8' strokeDasharray='4 3' fill='var(--v20-paper)' fillOpacity='0.85' />
