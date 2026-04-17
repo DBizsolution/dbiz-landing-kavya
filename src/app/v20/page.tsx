@@ -401,7 +401,7 @@ export default function V14Page() {
           <div className='v20-section-head'>
             <div className='num'>N°02 / By the numbers</div>
             <h2>A track record<br />of enterprise <em>delivery.</em></h2>
-            <p className='lead'>Not a pitch deck — measurable, deployed, running in production today.</p>
+            <p className='lead'>Not a POC — measurable, deployed, running in production today.</p>
           </div>
           <div className='v20-stats-grid'>
             {stats.map((s) => (

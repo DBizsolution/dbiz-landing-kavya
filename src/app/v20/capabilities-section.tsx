@@ -285,7 +285,6 @@ function StackDiagram() {
 
       {/* Frame + dot background */}
       <rect x='8' y='8' width={svgW - 16} height={svgH - 16} fill='url(#v20-ex-dot)' />
-      <rect x='8' y='8' width={svgW - 16} height={svgH - 16} fill='none' stroke='var(--v20-ink-frame)' strokeWidth='1' />
       <g stroke='var(--v20-ink-corner)' strokeWidth='2'>
         <line x1='8' y1='8' x2='26' y2='8' /><line x1='8' y1='8' x2='8' y2='26' />
         <line x1={svgW - 8} y1='8' x2={svgW - 26} y2='8' /><line x1={svgW - 8} y1='8' x2={svgW - 8} y2='26' />
