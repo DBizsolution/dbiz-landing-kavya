@@ -236,8 +236,8 @@ function StackDiagram() {
   // Both connector lines 110px — frameworks + products equally close to discs
   // Top line: y=174 → y=284 (110px)
   // Bottom line: y=466 → y=576 (110px)
-  // Grey-to-title gap: ~18px (wrapped) / ~30px (not wrapped) — matched on both sides
-  const tp = { desc: 112, name: 142, dot: 172 }
+  // Order: name (orange) ABOVE desc (grey) on BOTH top and bottom callouts
+  const tp = { name: 100, desc: 135, dot: 172 }
   const bp = { dot: 578,  name: 600, desc: 630 }
 
   // Soft-wrap helper — splits a string into up to 2 lines at a char limit
@@ -336,14 +336,14 @@ function StackDiagram() {
             {/* Layer name — just below disc */}
             <text x={cx} y={layerNameY} fontFamily='var(--font-mono)' fontSize='10' fontWeight='500' fill='#ffffff' textAnchor='middle' letterSpacing='2.5'>{layer.label}</text>
 
-            {/* Top callout — desc (grey) ABOVE, name (orange, emphasised) BELOW */}
+            {/* Top callout — name (orange, emphasised) ABOVE, desc (grey) BELOW */}
             <line x1={cx} y1={tp.dot + 2} x2={cx} y2={shaftY - discR - 8} stroke='rgba(255,255,255,0.18)' strokeWidth='0.7' strokeDasharray='3 2' className='v19-stack-connector' />
             <circle cx={cx} cy={tp.dot} r='2.8' fill='var(--v19-accent)' className='v19-stack-dot' />
-            {wrapDesc(layer.top.desc).map((line, li) => (
-              <text key={li} x={cx} y={tp.desc + li * 11} fontFamily='var(--font-sans)' fontSize='9' fill='rgba(255,255,255,0.38)' textAnchor='middle'>{line}</text>
-            ))}
             {wrapDesc(layer.top.name.toUpperCase(), 15).map((line, li) => (
               <text key={li} x={cx} y={tp.name + li * 13} fontFamily='var(--font-mono)' fontSize='11' fontWeight='500' letterSpacing='2' fill='var(--v19-accent)' textAnchor='middle'>{line}</text>
+            ))}
+            {wrapDesc(layer.top.desc).map((line, li) => (
+              <text key={li} x={cx} y={tp.desc + li * 11} fontFamily='var(--font-sans)' fontSize='9' fill='rgba(255,255,255,0.38)' textAnchor='middle'>{line}</text>
             ))}
 
             {/* Bottom callout — name (orange, emphasised) ABOVE, desc (grey) BELOW */}
