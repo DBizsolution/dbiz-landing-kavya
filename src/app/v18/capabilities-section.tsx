@@ -233,10 +233,12 @@ function StackDiagram() {
 
   const layerNameY = 452   // y of layer name (below disc)
 
-  // Uniform positions — all connector lines same length, no stagger
-  // TOP: desc (grey, can wrap) first, then name (orange, up to 2 lines), then dot
-  const tp = { desc: 80, name: 112, dot: 142 }
-  const bp = { dot: 492, name: 514, desc: 545 }
+  // Both connector lines 110px — frameworks + products equally close to discs
+  // Top line: y=174 → y=284 (110px)
+  // Bottom line: y=466 → y=576 (110px)
+  // Grey-to-title gap: ~18px (wrapped) / ~30px (not wrapped) — matched on both sides
+  const tp = { desc: 112, name: 142, dot: 172 }
+  const bp = { dot: 578,  name: 600, desc: 630 }
 
   // Soft-wrap helper — splits a string into up to 2 lines at a char limit
   const wrapDesc = (text: string, maxChars = 22): string[] => {
@@ -280,9 +282,12 @@ function StackDiagram() {
         <line x1={svgW - 8} y1={svgH - 8} x2={svgW - 26} y2={svgH - 8} /><line x1={svgW - 8} y1={svgH - 8} x2={svgW - 8} y2={svgH - 26} />
       </g>
 
-      {/* Title strip */}
+      {/* Top strip — promise anchor (moved up from bottom) */}
       <text x='50' y='32' fontFamily='var(--font-mono)' fontSize='9' fill='var(--v18-ink-label-strong)' letterSpacing='2'>SCALE 1:1</text>
-      <text x={svgW / 2} y='32' fontFamily='var(--font-mono)' fontSize='9' fill='var(--v18-ink-label-strong)' textAnchor='middle' letterSpacing='2'>DWG-STACK-01  ·  EXPLODED ASSEMBLY</text>
+      <line x1={svgW / 2 - 260} y1={44} x2={svgW / 2 + 260} y2={44} stroke='var(--v18-ink-corner)' strokeWidth='0.8' />
+      <line x1={svgW / 2 - 260} y1={40} x2={svgW / 2 - 260} y2={48} stroke='var(--v18-ink-corner)' strokeWidth='0.8' />
+      <line x1={svgW / 2 + 260} y1={40} x2={svgW / 2 + 260} y2={48} stroke='var(--v18-ink-corner)' strokeWidth='0.8' />
+      <text x={svgW / 2} y='32' fontFamily='var(--font-mono)' fontSize='10' fill='var(--v18-ink-dim)' textAnchor='middle' letterSpacing='3'>FULL STACK  ·  NO CAPABILITY GAPS  ·  NO VENDOR LOCK-IN</text>
       <text x={svgW - 50} y='32' fontFamily='var(--font-mono)' fontSize='9' fill='var(--v18-accent)' textAnchor='end' letterSpacing='1'>SHEET A1</text>
 
       {/* Central shaft — the spine connecting all components */}
@@ -326,7 +331,7 @@ function StackDiagram() {
             <circle cx={cx} cy={shaftY} r='2.5' fill='var(--v18-accent)' />
 
             {/* Layer number tag — just above disc */}
-            <text x={cx} y={shaftY - discR - 16} fontFamily='var(--font-mono)' fontSize='10' fontWeight='500' fill='var(--v18-accent)' textAnchor='middle' letterSpacing='2'>N°{layer.n}</text>
+            <text x={cx - 14} y={shaftY - discR - 16} fontFamily='var(--font-mono)' fontSize='10' fontWeight='500' fill='rgba(255,255,255,0.5)' textAnchor='end' letterSpacing='2'>L{layer.n}</text>
 
             {/* Layer name — just below disc */}
             <text x={cx} y={layerNameY} fontFamily='var(--font-mono)' fontSize='10' fontWeight='500' fill='#ffffff' textAnchor='middle' letterSpacing='2.5'>{layer.label}</text>
@@ -355,11 +360,8 @@ function StackDiagram() {
       })}
 
 
-      {/* Bottom anchor strip */}
-      <line x1={svgW / 2 - 260} y1={svgH - 48} x2={svgW / 2 + 260} y2={svgH - 48} stroke='var(--v18-ink-corner)' strokeWidth='0.8' />
-      <line x1={svgW / 2 - 260} y1={svgH - 52} x2={svgW / 2 - 260} y2={svgH - 44} stroke='var(--v18-ink-corner)' strokeWidth='0.8' />
-      <line x1={svgW / 2 + 260} y1={svgH - 52} x2={svgW / 2 + 260} y2={svgH - 44} stroke='var(--v18-ink-corner)' strokeWidth='0.8' />
-      <text x={svgW / 2} y={svgH - 26} fontFamily='var(--font-mono)' fontSize='10' fill='var(--v18-ink-dim)' textAnchor='middle' letterSpacing='3'>FULL STACK  ·  NO CAPABILITY GAPS  ·  NO VENDOR LOCK-IN</text>
+      {/* Bottom strip — drawing metadata (moved down from top) */}
+      <text x={svgW / 2} y={svgH - 26} fontFamily='var(--font-mono)' fontSize='9' fill='var(--v18-ink-label-strong)' textAnchor='middle' letterSpacing='2'>DWG-STACK-01  ·  EXPLODED ASSEMBLY</text>
     </svg>
   )
 }
