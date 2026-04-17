@@ -138,18 +138,20 @@ export default function ProvenSection() {
           </div>
           <div className='v19-proven-header-right'>
             <p className='lead'>50+ enterprise deployments across 11 industries. Real outcomes, not slide decks.</p>
-            <div className='v19-proven-filters'>
-              {(['all', 'industry', 'solution', 'technology'] as Filter[]).map((f) => (
-                <button
-                  key={f}
-                  className={`v19-proven-filter ${filter === f ? 'active' : ''}`}
-                  onClick={() => setFilter(f)}
-                >
-                  {f === 'all' ? 'All' : f === 'industry' ? 'By Industry' : f === 'solution' ? 'By Solution' : 'By Technology'}
-                </button>
-              ))}
-            </div>
           </div>
+        </div>
+
+        {/* Filter row — full width, below heading */}
+        <div className='v19-proven-filters'>
+          {(['all', 'industry', 'solution', 'technology'] as Filter[]).map((f) => (
+            <button
+              key={f}
+              className={`v19-proven-filter ${filter === f ? 'active' : ''}`}
+              onClick={() => setFilter(f)}
+            >
+              {f === 'all' ? 'All' : f === 'industry' ? 'By Industry' : f === 'solution' ? 'By Solution' : 'By Technology'}
+            </button>
+          ))}
         </div>
 
         {/* Carousel */}
@@ -184,19 +186,17 @@ export default function ProvenSection() {
             ))}
           </div>
 
-          {/* Navigation */}
+          {/* Navigation + CTA row */}
           <div className='v19-proven-nav'>
-            <button className='v19-proven-arrow' onClick={prev} aria-label='Previous'>←</button>
-            <div className='v19-proven-dots'>
-              {filtered.map((_, i) => (
-                <span key={i} className={`v19-proven-dot ${i === activeIdx ? 'active' : ''}`} onClick={() => setActiveIdx(i)} />
-              ))}
+            <div className='v19-proven-nav-center'>
+              <button className='v19-proven-arrow' onClick={prev} aria-label='Previous'>←</button>
+              <div className='v19-proven-dots'>
+                {filtered.map((_, i) => (
+                  <span key={i} className={`v19-proven-dot ${i === activeIdx ? 'active' : ''}`} onClick={() => setActiveIdx(i)} />
+                ))}
+              </div>
+              <button className='v19-proven-arrow' onClick={next} aria-label='Next'>→</button>
             </div>
-            <button className='v19-proven-arrow' onClick={next} aria-label='Next'>→</button>
-          </div>
-
-          {/* All case studies CTA */}
-          <div className='v19-proven-all'>
             <a href='/case-studies' className='v19-proven-all-cta'>
               See all case studies <span aria-hidden='true'>&rarr;</span>
             </a>
